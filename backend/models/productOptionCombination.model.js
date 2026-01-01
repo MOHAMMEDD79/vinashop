@@ -30,7 +30,8 @@ class ProductOptionCombination {
   static async generateSummary(optionValues, lang = 'en') {
     if (!optionValues || optionValues.length === 0) return '';
 
-    const valueNameField = `value_name_${lang}`;
+    // Only en and ar supported in database
+    const valueNameField = lang === 'ar' ? 'value_name_ar' : 'value_name_en';
     const valueIds = optionValues.map(v => v.option_value_id);
     const placeholders = valueIds.map(() => '?').join(',');
 

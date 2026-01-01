@@ -265,8 +265,9 @@ class Product {
     const product = await this.getById(productId, lang);
     if (!product) return null;
 
-    const nameField = `value_name_${lang}`;
-    const typeNameField = `type_name_${lang}`;
+    // Only en and ar are supported in the database
+    const nameField = lang === 'ar' ? 'value_name_ar' : 'value_name_en';
+    const typeNameField = lang === 'ar' ? 'type_name_ar' : 'type_name_en';
 
     // Get images
     const imagesSql = `
@@ -287,8 +288,7 @@ class Product {
         po.display_order,
         pot.option_type_id,
         pot.${typeNameField} as type_name,
-        pot.type_name_en,
-        pot.display_type
+        pot.type_name_en
       FROM product_options po
       JOIN product_option_types pot ON po.option_type_id = pot.option_type_id
       WHERE po.product_id = ? AND pot.is_active = 1
@@ -303,8 +303,7 @@ class Product {
           option_value_id,
           ${nameField} as value_name,
           value_name_en,
-          hex_code,
-          image_url,
+          color_code,
           additional_price,
           display_order
         FROM product_option_values
@@ -347,10 +346,9 @@ class Product {
           SELECT
             pov.option_value_id,
             pov.${nameField} as value_name,
-            pov.hex_code,
+            pov.color_code,
             pot.option_type_id,
-            pot.${typeNameField} as type_name,
-            pot.display_type
+            pot.${typeNameField} as type_name
           FROM product_option_values pov
           JOIN product_option_types pot ON pov.option_type_id = pot.option_type_id
           WHERE pov.option_value_id = ?
@@ -370,7 +368,7 @@ class Product {
       SELECT DISTINCT
         pov.option_value_id as color_id,
         pov.${nameField} as color_name,
-        pov.hex_code as color_code
+        pov.color_code as color_code
       FROM product_option_values pov
       JOIN product_option_types pot ON pov.option_type_id = pot.option_type_id
       WHERE pot.type_name_en = 'Color' AND pov.is_active = 1

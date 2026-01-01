@@ -28,9 +28,9 @@ class ProductOption {
     let whereClause = 'WHERE 1=1';
 
     if (search) {
-      whereClause += ' AND (type_name_en LIKE ? OR type_name_ar LIKE ? OR type_name_he LIKE ?)';
+      whereClause += ' AND (type_name_en LIKE ? OR type_name_ar LIKE ?)';
       const searchTerm = `%${search}%`;
-      params.push(searchTerm, searchTerm, searchTerm);
+      params.push(searchTerm, searchTerm);
     }
 
     if (is_active !== undefined) {
@@ -102,33 +102,22 @@ class ProductOption {
     const {
       type_name_en,
       type_name_ar,
-      type_name_he,
       display_order = 0,
       is_active = true,
-      display_type = 'dropdown',
-      description_en = null,
-      description_ar = null,
-      description_he = null,
     } = data;
 
     const sql = `
       INSERT INTO product_option_types (
-        type_name_en, type_name_ar, type_name_he,
-        display_order, is_active, display_type,
-        description_en, description_ar, description_he, created_at
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())
+        type_name_en, type_name_ar,
+        display_order, is_active, created_at
+      ) VALUES (?, ?, ?, ?, NOW())
     `;
 
     const result = await query(sql, [
       type_name_en,
       type_name_ar,
-      type_name_he,
       display_order,
       is_active ? 1 : 0,
-      display_type,
-      description_en,
-      description_ar,
-      description_he,
     ]);
 
     return await this.getTypeById(result.insertId);
@@ -139,9 +128,8 @@ class ProductOption {
    */
   static async updateType(typeId, data) {
     const allowedFields = [
-      'type_name_en', 'type_name_ar', 'type_name_he',
-      'display_order', 'is_active', 'display_type',
-      'description_en', 'description_ar', 'description_he'
+      'type_name_en', 'type_name_ar',
+      'display_order', 'is_active'
     ];
     const updates = [];
     const values = [];
@@ -218,8 +206,7 @@ class ProductOption {
       SELECT
         v.*,
         t.type_name_en,
-        t.type_name_ar,
-        t.type_name_he
+        t.type_name_ar
       FROM product_option_values v
       LEFT JOIN product_option_types t ON v.option_type_id = t.option_type_id
       WHERE v.option_value_id = ?
@@ -236,30 +223,23 @@ class ProductOption {
       option_type_id,
       value_name_en,
       value_name_ar,
-      value_name_he,
       additional_price = 0,
       display_order = 0,
       is_active = true,
-      hex_code = null,
-      image_url = null,
       color_code = null,
     } = data;
 
     const sql = `
       INSERT INTO product_option_values (
-        option_type_id, value_name_en, value_name_ar, value_name_he,
-        hex_code, image_url, color_code,
-        additional_price, display_order, is_active, created_at
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())
+        option_type_id, value_name_en, value_name_ar,
+        color_code, additional_price, display_order, is_active, created_at
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())
     `;
 
     const result = await query(sql, [
       option_type_id,
       value_name_en,
       value_name_ar,
-      value_name_he,
-      hex_code,
-      image_url,
       color_code,
       additional_price,
       display_order,
@@ -274,9 +254,9 @@ class ProductOption {
    */
   static async updateValue(valueId, data) {
     const allowedFields = [
-      'value_name_en', 'value_name_ar', 'value_name_he',
+      'value_name_en', 'value_name_ar',
       'additional_price', 'display_order', 'is_active',
-      'hex_code', 'image_url', 'color_code'
+      'color_code'
     ];
     const updates = [];
     const values = [];
@@ -349,8 +329,7 @@ class ProductOption {
         po.display_order,
         t.option_type_id,
         t.type_name_en,
-        t.type_name_ar,
-        t.type_name_he
+        t.type_name_ar
       FROM product_options po
       JOIN product_option_types t ON po.option_type_id = t.option_type_id
       WHERE po.product_id = ?
@@ -458,17 +437,16 @@ class ProductOption {
    */
   static async getTypesWithValues(options = {}) {
     const { is_active = true, lang = 'en' } = options;
-    const nameField = `type_name_${lang}`;
-    const valueNameField = `value_name_${lang}`;
+    // Only en and ar are supported
+    const nameField = lang === 'ar' ? 'type_name_ar' : 'type_name_en';
+    const valueNameField = lang === 'ar' ? 'value_name_ar' : 'value_name_en';
 
     const typesSql = `
       SELECT
         option_type_id,
         type_name_en,
         type_name_ar,
-        type_name_he,
         ${nameField} as type_name,
-        display_type,
         display_order
       FROM product_option_types
       ${is_active ? 'WHERE is_active = 1' : ''}
@@ -483,10 +461,8 @@ class ProductOption {
           option_value_id,
           value_name_en,
           value_name_ar,
-          value_name_he,
           ${valueNameField} as value_name,
-          hex_code,
-          image_url,
+          color_code,
           additional_price,
           display_order
         FROM product_option_values
@@ -502,33 +478,32 @@ class ProductOption {
 
   /**
    * Get filterable option types for a category
+   * Note: category_option_types table doesn't exist, returning all active types
    */
   static async getFilterableByCategory(categoryId, options = {}) {
     const { lang = 'en' } = options;
-    const nameField = `t.type_name_${lang}`;
-    const valueNameField = `v.value_name_${lang}`;
+    const nameField = lang === 'ar' ? 't.type_name_ar' : 't.type_name_en';
+    const valueNameField = lang === 'ar' ? 'value_name_ar' : 'value_name_en';
 
+    // Since category_option_types doesn't exist, return all active option types
     const sql = `
       SELECT
         t.option_type_id,
         ${nameField} as type_name,
-        t.display_type,
-        cot.display_order
-      FROM category_option_types cot
-      JOIN product_option_types t ON cot.option_type_id = t.option_type_id
-      WHERE cot.category_id = ? AND cot.is_filterable = 1 AND t.is_active = 1
-      ORDER BY cot.display_order ASC
+        t.display_order
+      FROM product_option_types t
+      WHERE t.is_active = 1
+      ORDER BY t.display_order ASC
     `;
 
-    const types = await query(sql, [categoryId]);
+    const types = await query(sql);
 
     for (const type of types) {
       const valuesSql = `
         SELECT
           option_value_id,
           ${valueNameField} as value_name,
-          hex_code,
-          image_url
+          color_code
         FROM product_option_values
         WHERE option_type_id = ? AND is_active = 1
         ORDER BY display_order ASC
@@ -541,25 +516,29 @@ class ProductOption {
 
   /**
    * Link option type to category for filtering
+   * Note: category_option_types table doesn't exist
    */
   static async linkTypeToCategory(categoryId, optionTypeId, isFilterable = true, displayOrder = 0) {
+    // This table doesn't exist in the database
+    console.warn('category_option_types table does not exist');
+    return false;
+    /* Original code - uncomment if table is created:
     const sql = `
       INSERT INTO category_option_types (category_id, option_type_id, is_filterable, display_order)
       VALUES (?, ?, ?, ?)
       ON DUPLICATE KEY UPDATE is_filterable = ?, display_order = ?
     `;
 
-    await query(sql, [categoryId, optionTypeId, isFilterable ? 1 : 0, displayOrder, isFilterable ? 1 : 0, displayOrder]);
-    return true;
+    */
   }
 
   /**
    * Unlink option type from category
+   * Note: category_option_types table doesn't exist
    */
   static async unlinkTypeFromCategory(categoryId, optionTypeId) {
-    const sql = 'DELETE FROM category_option_types WHERE category_id = ? AND option_type_id = ?';
-    const result = await query(sql, [categoryId, optionTypeId]);
-    return result.affectedRows > 0;
+    console.warn('category_option_types table does not exist');
+    return false;
   }
 
   /**
@@ -567,16 +546,14 @@ class ProductOption {
    */
   static async getAllTypesList(options = {}) {
     const { is_active = true, lang = 'en' } = options;
-    const nameField = `type_name_${lang}`;
+    const nameField = lang === 'ar' ? 'type_name_ar' : 'type_name_en';
 
     const sql = `
       SELECT
         option_type_id,
         type_name_en,
         type_name_ar,
-        type_name_he,
         ${nameField} as type_name,
-        display_type,
         is_active
       FROM product_option_types
       ${is_active ? 'WHERE is_active = 1' : ''}
@@ -591,17 +568,15 @@ class ProductOption {
    */
   static async getColorOptions(options = {}) {
     const { is_active = true, lang = 'en' } = options;
-    const valueNameField = `value_name_${lang}`;
+    const valueNameField = lang === 'ar' ? 'value_name_ar' : 'value_name_en';
 
     const sql = `
       SELECT
         v.option_value_id,
         v.value_name_en,
         v.value_name_ar,
-        v.value_name_he,
         v.${valueNameField} as value_name,
-        v.hex_code,
-        v.image_url,
+        v.color_code,
         v.additional_price
       FROM product_option_values v
       JOIN product_option_types t ON v.option_type_id = t.option_type_id
@@ -618,14 +593,13 @@ class ProductOption {
    */
   static async getSizeOptions(options = {}) {
     const { is_active = true, lang = 'en' } = options;
-    const valueNameField = `value_name_${lang}`;
+    const valueNameField = lang === 'ar' ? 'value_name_ar' : 'value_name_en';
 
     const sql = `
       SELECT
         v.option_value_id,
         v.value_name_en,
         v.value_name_ar,
-        v.value_name_he,
         v.${valueNameField} as value_name,
         v.additional_price
       FROM product_option_values v
@@ -647,14 +621,13 @@ class ProductOption {
     let sql = `
       SELECT
         v.*,
-        t.type_name_en,
-        t.display_type
+        t.type_name_en
       FROM product_option_values v
       JOIN product_option_types t ON v.option_type_id = t.option_type_id
-      WHERE (v.value_name_en LIKE ? OR v.value_name_ar LIKE ? OR v.value_name_he LIKE ?)
+      WHERE (v.value_name_en LIKE ? OR v.value_name_ar LIKE ?)
     `;
 
-    const params = [`%${searchTerm}%`, `%${searchTerm}%`, `%${searchTerm}%`];
+    const params = [`%${searchTerm}%`, `%${searchTerm}%`];
 
     if (type_id) {
       sql += ' AND v.option_type_id = ?';

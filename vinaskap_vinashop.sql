@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- مضيف: localhost:3306
--- وقت الجيل: 01 يناير 2026 الساعة 20:27
+-- وقت الجيل: 01 يناير 2026 الساعة 21:21
 -- إصدار الخادم: 8.0.33-cll-lve
 -- نسخة PHP: 8.4.16
 
@@ -147,7 +147,8 @@ CREATE TABLE `banners` (
 --
 
 INSERT INTO `banners` (`banner_id`, `title_en`, `title_ar`, `subtitle_en`, `subtitle_ar`, `media_path`, `media_type`, `mime_type`, `link_type`, `link_value`, `display_order`, `is_active`, `start_date`, `end_date`, `created_at`, `updated_at`) VALUES
-(1, NULL, NULL, NULL, NULL, 'uploads/banners/drone003g-1767215143853-67ea69cb-601f-4fab-8c1a-d9b1434496b3.jpg', 'image', 'image/jpeg', 'none', NULL, 0, 1, NULL, NULL, '2025-12-31 21:05:43', '2025-12-31 21:05:43');
+(1, NULL, NULL, NULL, NULL, 'uploads/banners/drone003g-1767215143853-67ea69cb-601f-4fab-8c1a-d9b1434496b3.jpg', 'image', 'image/jpeg', 'none', NULL, 0, 1, NULL, NULL, '2025-12-31 21:05:43', '2025-12-31 21:05:43'),
+(2, 'm', NULL, NULL, NULL, 'uploads/banners/44-1767294491230-95396957-4370-4514-aa1d-b8b358db4c53.jpg', 'image', 'image/jpeg', 'none', NULL, 1, 1, NULL, NULL, '2026-01-01 19:08:11', '2026-01-01 19:08:11');
 
 -- --------------------------------------------------------
 
@@ -184,6 +185,13 @@ CREATE TABLE `bill_sequences` (
   `last_number` int DEFAULT '0',
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- إرجاع أو استيراد بيانات الجدول `bill_sequences`
+--
+
+INSERT INTO `bill_sequences` (`sequence_id`, `sequence_type`, `prefix`, `current_year`, `last_number`, `updated_at`) VALUES
+(1, 'customer_bill', 'BILL', 2026, 3, '2026-01-01 20:50:09');
 
 -- --------------------------------------------------------
 
@@ -259,7 +267,7 @@ CREATE TABLE `contact_messages` (
 
 CREATE TABLE `customer_bills` (
   `bill_id` int NOT NULL,
-  `user_id` int NOT NULL,
+  `user_id` int DEFAULT NULL,
   `order_id` int DEFAULT NULL,
   `bill_number` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `bill_date` datetime DEFAULT CURRENT_TIMESTAMP,
@@ -277,6 +285,13 @@ CREATE TABLE `customer_bills` (
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- إرجاع أو استيراد بيانات الجدول `customer_bills`
+--
+
+INSERT INTO `customer_bills` (`bill_id`, `user_id`, `order_id`, `bill_number`, `bill_date`, `customer_name`, `customer_phone`, `subtotal`, `tax_amount`, `discount_amount`, `total_amount`, `amount_paid`, `payment_status`, `notes`, `created_by`, `created_at`, `updated_at`) VALUES
+(1, NULL, NULL, 'BILL-2026-00003', '2026-01-01 00:00:00', 'asd', '059287292', 10.00, 0.00, 0.00, 10.00, 0.00, 'unpaid', NULL, 1, '2026-01-01 20:50:09', '2026-01-01 20:50:09');
 
 --
 -- القوادح `customer_bills`
@@ -314,6 +329,13 @@ CREATE TABLE `customer_bill_items` (
   `total_price` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- إرجاع أو استيراد بيانات الجدول `customer_bill_items`
+--
+
+INSERT INTO `customer_bill_items` (`item_id`, `bill_id`, `product_id`, `variant_id`, `description`, `quantity`, `unit_price`, `discount_percent`, `total_price`) VALUES
+(1, 1, 1, NULL, 'asd', 1, 10.00, 0.00, 10.00);
+
 -- --------------------------------------------------------
 
 --
@@ -322,7 +344,7 @@ CREATE TABLE `customer_bill_items` (
 
 CREATE TABLE `customer_debts` (
   `debt_id` int NOT NULL,
-  `user_id` int NOT NULL,
+  `user_id` int DEFAULT NULL,
   `bill_id` int DEFAULT NULL,
   `order_id` int DEFAULT NULL,
   `customer_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -347,13 +369,13 @@ CREATE TABLE `customer_debts` (
 CREATE TABLE `debt_payments` (
   `payment_id` int NOT NULL,
   `debt_id` int NOT NULL,
-  `user_id` int NOT NULL,
+  `user_id` int DEFAULT NULL,
   `amount` decimal(10,2) NOT NULL,
   `payment_method` enum('cash','card','bank_transfer','other') COLLATE utf8mb4_unicode_ci DEFAULT 'cash',
   `payment_date` datetime DEFAULT CURRENT_TIMESTAMP,
   `receipt_number` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `notes` text COLLATE utf8mb4_unicode_ci,
-  `recorded_by` int NOT NULL,
+  `recorded_by` int DEFAULT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -1044,6 +1066,13 @@ CREATE TABLE `wholesalers` (
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- إرجاع أو استيراد بيانات الجدول `wholesalers`
+--
+
+INSERT INTO `wholesalers` (`wholesaler_id`, `company_name`, `contact_person`, `phone`, `email`, `address`, `tax_number`, `discount_percentage`, `credit_limit`, `current_balance`, `status`, `notes`, `created_at`, `updated_at`) VALUES
+(1, 'asd', 'asdasd', '0592782902', 'moh@gmail.com', NULL, NULL, 0.00, 0.00, 0.00, 'active', NULL, '2026-01-01 20:34:57', '2026-01-01 20:34:57');
 
 -- --------------------------------------------------------
 
@@ -1737,7 +1766,7 @@ ALTER TABLE `admin_users`
 -- AUTO_INCREMENT for table `banners`
 --
 ALTER TABLE `banners`
-  MODIFY `banner_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `banner_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `bill_images`
@@ -1749,7 +1778,7 @@ ALTER TABLE `bill_images`
 -- AUTO_INCREMENT for table `bill_sequences`
 --
 ALTER TABLE `bill_sequences`
-  MODIFY `sequence_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `sequence_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `cart_items`
@@ -1773,13 +1802,13 @@ ALTER TABLE `contact_messages`
 -- AUTO_INCREMENT for table `customer_bills`
 --
 ALTER TABLE `customer_bills`
-  MODIFY `bill_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `bill_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `customer_bill_items`
 --
 ALTER TABLE `customer_bill_items`
-  MODIFY `item_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `item_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `customer_debts`
@@ -1953,7 +1982,7 @@ ALTER TABLE `transactions`
 -- AUTO_INCREMENT for table `wholesalers`
 --
 ALTER TABLE `wholesalers`
-  MODIFY `wholesaler_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `wholesaler_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `wholesaler_orders`

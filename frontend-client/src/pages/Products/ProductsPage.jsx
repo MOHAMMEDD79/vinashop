@@ -69,7 +69,8 @@ const ProductsPage = () => {
         }
         if (optionTypesRes.status === 'fulfilled') {
           // Option types with their values (e.g., Color, Size, Material, etc.)
-          setOptionTypes(optionTypesRes.value.option_types || optionTypesRes.value.optionTypes || []);
+          // Backend returns: { success: true, options: [...] }
+          setOptionTypes(optionTypesRes.value.options || optionTypesRes.value.option_types || optionTypesRes.value.optionTypes || []);
         }
       } catch (error) {
         console.error('Error fetching filters:', error);

@@ -217,7 +217,7 @@ class PublicModel {
           pov.value_name_${safeLang} as value_name,
           pov.value_name_en,
           pov.value_name_ar,
-          pov.hex_code,
+          pov.color_code,
           pov.additional_price,
           pov.display_order as value_order
         FROM product_options po
@@ -249,7 +249,7 @@ class PublicModel {
         value_name: opt.value_name,
         value_name_en: opt.value_name_en,
         value_name_ar: opt.value_name_ar,
-        hex_code: opt.hex_code,
+        color_code: opt.color_code,
         additional_price: parseFloat(opt.additional_price) || 0
       });
       return acc;
@@ -682,14 +682,15 @@ class PublicModel {
    * Get available colors for filtering (uses new options system)
    */
   static async getAvailableColors(lang = 'en') {
-    const nameField = `value_name_${lang}`;
+    // Only en and ar supported
+    const nameField = lang === 'ar' ? 'value_name_ar' : 'value_name_en';
 
     // Try new options system first
     const optionColors = await query(`
       SELECT DISTINCT
         pov.option_value_id as color_id,
         pov.${nameField} as name,
-        pov.hex_code as color_code
+        pov.color_code as color_code
       FROM product_option_values pov
       INNER JOIN product_option_types pot ON pov.option_type_id = pot.option_type_id
       WHERE pot.type_name_en = 'Color' AND pov.is_active = 1
@@ -719,7 +720,8 @@ class PublicModel {
    * Get available sizes for filtering (uses new options system)
    */
   static async getAvailableSizes(lang = 'en') {
-    const nameField = `value_name_${lang}`;
+    // Only en and ar supported
+    const nameField = lang === 'ar' ? 'value_name_ar' : 'value_name_en';
 
     // Try new options system first - both Size and Clothing Size
     const optionSizes = await query(`
@@ -757,15 +759,15 @@ class PublicModel {
    * Get all option types with values for dynamic filters
    */
   static async getOptionFilters(lang = 'en', categoryId = null) {
-    const nameField = `type_name_${lang}`;
-    const valueNameField = `value_name_${lang}`;
+    // Only en and ar are supported in the database
+    const nameField = lang === 'ar' ? 'type_name_ar' : 'type_name_en';
+    const valueNameField = lang === 'ar' ? 'value_name_ar' : 'value_name_en';
 
     let typesSql = `
       SELECT DISTINCT
         pot.option_type_id,
         pot.${nameField} as type_name,
         pot.type_name_en,
-        pot.display_type,
         pot.display_order
       FROM product_option_types pot
       WHERE pot.is_active = 1
@@ -773,15 +775,8 @@ class PublicModel {
 
     const params = [];
 
-    if (categoryId) {
-      typesSql += `
-        AND pot.option_type_id IN (
-          SELECT option_type_id FROM category_option_types
-          WHERE category_id = ? AND is_filterable = 1
-        )
-      `;
-      params.push(categoryId);
-    }
+    // Note: category_option_types table doesn't exist, so we skip category filtering for now
+    // If you need category-based filtering, you'll need to create that table
 
     typesSql += ' ORDER BY pot.display_order ASC';
 
@@ -793,7 +788,7 @@ class PublicModel {
         SELECT
           option_value_id,
           ${valueNameField} as value_name,
-          hex_code,
+          color_code,
           additional_price,
           display_order
         FROM product_option_values

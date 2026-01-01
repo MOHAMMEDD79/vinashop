@@ -7,23 +7,32 @@ const allowedOrigins = [
   // Production domains (HTTP and HTTPS)
   'http://vinashop.ps',
   'https://vinashop.ps',
-  'http://admin.vinashop.ps',
-  'https://admin.vinashop.ps',
-  'http://api.vinashop.ps',
-  'https://api.vinashop.ps',
   'http://www.vinashop.ps',
   'https://www.vinashop.ps',
+  // Dashboard domains
+  'http://dashboard.vinashop.ps',
+  'https://dashboard.vinashop.ps',
+  'http://www.dashboard.vinashop.ps',
+  'https://www.dashboard.vinashop.ps',
+  // Admin domains (alias)
+  'http://admin.vinashop.ps',
+  'https://admin.vinashop.ps',
+  // API domain
+  'http://api.vinashop.ps',
+  'https://api.vinashop.ps',
   // Environment variables (for flexibility)
   process.env.FRONTEND_URL,
   process.env.ADMIN_PANEL_URL,
-  // Development (only used when NODE_ENV !== production)
-  ...(process.env.NODE_ENV !== 'production' ? [
-    'http://localhost:3000',
-    'http://localhost:3001',
-    'http://localhost:5173',
-    'http://127.0.0.1:3000',
-    'http://127.0.0.1:5173',
-  ] : []),
+  // Development/Testing - localhost (always allowed for testing)
+  'http://localhost:3000',
+  'http://localhost:3001',
+  'http://localhost:5173',
+  'http://localhost:5174',
+  'http://localhost:5175',
+  'http://127.0.0.1:3000',
+  'http://127.0.0.1:5173',
+  'http://127.0.0.1:5174',
+  'http://127.0.0.1:5175',
 ].filter(Boolean);
 
 const corsOptions = {
