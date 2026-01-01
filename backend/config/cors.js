@@ -4,11 +4,15 @@
  */
 
 const allowedOrigins = [
-  // Production domains
+  // Production domains (HTTP and HTTPS)
   'http://vinashop.ps',
+  'https://vinashop.ps',
   'http://admin.vinashop.ps',
+  'https://admin.vinashop.ps',
   'http://api.vinashop.ps',
+  'https://api.vinashop.ps',
   'http://www.vinashop.ps',
+  'https://www.vinashop.ps',
   // Environment variables (for flexibility)
   process.env.FRONTEND_URL,
   process.env.ADMIN_PANEL_URL,

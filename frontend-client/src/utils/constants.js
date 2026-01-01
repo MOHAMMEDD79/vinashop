@@ -1,8 +1,8 @@
 // VinaShop Client Constants
 
 // API Configuration
-export const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://api.vinashop.ps/api';
-export const UPLOADS_URL = import.meta.env.VITE_UPLOADS_URL || 'http://api.vinashop.ps';
+export const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://api.vinashop.ps/api';
+export const UPLOADS_URL = import.meta.env.VITE_UPLOADS_URL || 'https://api.vinashop.ps';
 
 // Delivery Areas and Fees (in ILS)
 export const DELIVERY_AREAS = {

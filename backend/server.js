@@ -211,7 +211,7 @@ const startServer = async () => {
     }
 
     // Only listen if not production (Passenger handles production)
-    if (process.env.NODE_ENV !== 'production') {
+    if (true) {
       app.listen(PORT, HOST, () => {
         logger.info(`Server running on http://${HOST}:${PORT}`);
         logger.info(`Environment: ${process.env.NODE_ENV || 'development'}`);

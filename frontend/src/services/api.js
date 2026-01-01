@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Get API URL from environment variable, with fallback
-const API_BASE = import.meta.env.VITE_API_URL || 'http://api.vinashop.ps';
+const API_BASE = import.meta.env.VITE_API_URL || 'https://api.vinashop.ps';
 const API_URL = `${API_BASE}/api/admin/v1`;
 
 const api = axios.create({
@@ -14,6 +14,7 @@ const api = axios.create({
 // Add token to requests
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
+  console.log(token)
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }

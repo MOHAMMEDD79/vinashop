@@ -9,7 +9,7 @@ const mysql = require('mysql2/promise');
  * Database connection pool configuration
  */
 const poolConfig = {
-  host: process.env.DB_HOST || '127.0.0.1',
+  host: process.env.DB_HOST || '45.159.160.5',
   port: parseInt(process.env.DB_PORT, 10) || 3306,
   user: process.env.DB_USER || 'root',
   password: process.env.DB_PASSWORD || '',

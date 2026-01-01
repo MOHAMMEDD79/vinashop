@@ -1,0 +1,112 @@
+{
+    "success": false,
+    "message": "Route POST /api/admin/v1/test/products-list?page=1&limit=10 not found",
+    "error_code": "ROUTE_NOT_FOUND",
+    "errorCode": "ROUTE_NOT_FOUND",
+    "status": 404,
+    "stack": "Error: Route POST /api/admin/v1/test/products-list?page=1&limit=10 not found\n    at notFoundHandler (/home/vinaskap/api.vinashop.ps/middleware/error.middleware.js:64:17)\n    at Layer.handle [as handle_request] (/home/vinaskap/nodevenv/api.vinashop.ps/20/lib/node_modules/express/lib/router/layer.js:95:5)\n    at trim_prefix (/home/vinaskap/nodevenv/api.vinashop.ps/20/lib/node_modules/express/lib/router/index.js:328:13)\n    at /home/vinaskap/nodevenv/api.vinashop.ps/20/lib/node_modules/express/lib/router/index.js:286:9\n    at Function.process_params (/home/vinaskap/nodevenv/api.vinashop.ps/20/lib/node_modules/express/lib/router/index.js:346:12)\n    at next (/home/vinaskap/nodevenv/api.vinashop.ps/20/lib/node_modules/express/lib/router/index.js:280:10)\n    at /home/vinaskap/nodevenv/api.vinashop.ps/20/lib/node_modules/express/lib/router/index.js:646:15\n    at next (/home/vinaskap/nodevenv/api.vinashop.ps/20/lib/node_modules/express/lib/router/index.js:265:14)\n    at Function.handle (/home/vinaskap/nodevenv/api.vinashop.ps/20/lib/node_modules/express/lib/router/index.js:175:3)\n    at router (/home/vinaskap/nodevenv/api.vinashop.ps/20/lib/node_modules/express/lib/router/index.js:47:12)"
+}
+{
+    "success": false,
+    "message": "Invalid access token",
+    "error_code": "INVALID_TOKEN"
+}
+{
+    "success": true,
+    "table": "admin_users",
+    "columns": [
+        {
+            "Field": "admin_id",
+            "Type": "int",
+            "Null": "NO",
+            "Key": "PRI",
+            "Default": null,
+            "Extra": "auto_increment"
+        },
+        {
+            "Field": "username",
+            "Type": "varchar(100)",
+            "Null": "NO",
+            "Key": "UNI",
+            "Default": null,
+            "Extra": ""
+        },
+        {
+            "Field": "email",
+            "Type": "varchar(255)",
+            "Null": "NO",
+            "Key": "UNI",
+            "Default": null,
+            "Extra": ""
+        },
+        {
+            "Field": "password_hash",
+            "Type": "varchar(255)",
+            "Null": "NO",
+            "Key": "",
+            "Default": null,
+            "Extra": ""
+        },
+        {
+            "Field": "full_name",
+            "Type": "varchar(255)",
+            "Null": "YES",
+            "Key": "",
+            "Default": null,
+            "Extra": ""
+        },
+        {
+            "Field": "role",
+            "Type": "enum('super_admin','admin','moderator')",
+            "Null": "YES",
+            "Key": "",
+            "Default": "admin",
+            "Extra": ""
+        },
+        {
+            "Field": "is_active",
+            "Type": "tinyint(1)",
+            "Null": "YES",
+            "Key": "",
+            "Default": "1",
+            "Extra": ""
+        },
+        {
+            "Field": "created_at",
+            "Type": "timestamp",
+            "Null": "NO",
+            "Key": "",
+            "Default": "CURRENT_TIMESTAMP",
+            "Extra": "DEFAULT_GENERATED"
+        },
+        {
+            "Field": "updated_at",
+            "Type": "timestamp",
+            "Null": "NO",
+            "Key": "",
+            "Default": "CURRENT_TIMESTAMP",
+            "Extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP"
+        }
+    ]
+}
+{
+    "success": true,
+    "message": "Login successful",
+    "data": {
+        "user": {
+            "id": 1,
+            "adminId": 1,
+            "username": "admin",
+            "email": "admin@vinashop.com",
+            "fullName": "Admin User",
+            "role": "super_admin",
+            "permissions": [],
+            "avatar": null,
+            "status": "active"
+        },
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiYWRtaW5JZCI6MSwiZW1haWwiOiJhZG1pbkB2aW5hc2hvcC5jb20iLCJyb2xlIjoic3VwZXJfYWRtaW4iLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzY3MjkwMzA4LCJleHAiOjE3Njc4OTUxMDgsImF1ZCI6InZpbmFzaG9wLWFkbWluLXBhbmVsIiwiaXNzIjoidmluYXNob3AtYWRtaW4ifQ.MUVo8NWuBIDLJ0iLZnt9q_QJRMp4_0MhXcdM8nos5mM",
+        "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiYWRtaW5JZCI6MSwiZW1haWwiOiJhZG1pbkB2aW5hc2hvcC5jb20iLCJyb2xlIjoic3VwZXJfYWRtaW4iLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzY3MjkwMzA4LCJleHAiOjE3Njc4OTUxMDgsImF1ZCI6InZpbmFzaG9wLWFkbWluLXBhbmVsIiwiaXNzIjoidmluYXNob3AtYWRtaW4ifQ.MUVo8NWuBIDLJ0iLZnt9q_QJRMp4_0MhXcdM8nos5mM",
+        "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiYWRtaW5JZCI6MSwiZW1haWwiOiJhZG1pbkB2aW5hc2hvcC5jb20iLCJyb2xlIjoic3VwZXJfYWRtaW4iLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc2NzI5MDMwOCwiZXhwIjoxNzY5ODgyMzA4LCJhdWQiOiJ2aW5hc2hvcC1hZG1pbi1wYW5lbCIsImlzcyI6InZpbmFzaG9wLWFkbWluIn0.NI3uD2D7fajY49y63e4XiEXpAOYu4rgsTqu2BPcsOLo",
+        "expiresIn": "7d"
+    }
+}

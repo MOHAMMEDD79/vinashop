@@ -429,7 +429,9 @@ router.get('/orders-simple', authenticate, async (req, res) => {
 router.get('/orders', authenticate, async (req, res) => {
   try {
     const { page = 1, limit = 10, search = '', status = '' } = req.query;
-    const offset = (parseInt(page) - 1) * parseInt(limit);
+    const pageNum = Math.max(1, parseInt(page) || 1);
+    const limitNum = Math.min(100, Math.max(1, parseInt(limit) || 10));
+    const offset = (pageNum - 1) * limitNum;
 
     let whereClause = 'WHERE 1=1';
     const params = [];
@@ -452,6 +454,7 @@ router.get('/orders', authenticate, async (req, res) => {
     const total = countResult[0]?.total || 0;
 
     // Get orders with guest info and items count
+    // Note: Using template literals for LIMIT/OFFSET to avoid mysql2 prepared statement issues
     const orders = await query(`
       SELECT o.order_id, o.order_number, o.user_id, o.address_id,
              o.status, o.payment_method, o.payment_status,
@@ -464,17 +467,17 @@ router.get('/orders', authenticate, async (req, res) => {
       FROM orders o
       ${whereClause}
       ORDER BY o.created_at DESC
-      LIMIT ? OFFSET ?
-    `, [...params, parseInt(limit), offset]);
+      LIMIT ${limitNum} OFFSET ${offset}
+    `, params);
 
     res.json({
       success: true,
       data: {
         orders,
         total,
-        page: parseInt(page),
-        limit: parseInt(limit),
-        totalPages: Math.ceil(total / parseInt(limit))
+        page: pageNum,
+        limit: limitNum,
+        totalPages: Math.ceil(total / limitNum)
       }
     });
   } catch (error) {
@@ -762,7 +765,9 @@ router.get('/all-tables-count', authenticate, async (req, res) => {
 router.get('/products-list', authenticate, async (req, res) => {
   try {
     const { page = 1, limit = 10, search = '', category_id } = req.query;
-    const offset = (parseInt(page) - 1) * parseInt(limit);
+    const pageNum = Math.max(1, parseInt(page) || 1);
+    const limitNum = Math.min(100, Math.max(1, parseInt(limit) || 10));
+    const offset = (pageNum - 1) * limitNum;
 
     let whereClause = 'WHERE 1=1';
     const params = [];
@@ -774,7 +779,7 @@ router.get('/products-list', authenticate, async (req, res) => {
 
     if (category_id) {
       whereClause += ' AND p.category_id = ?';
-      params.push(category_id);
+      params.push(parseInt(category_id));
     }
 
     // Get total count
@@ -782,6 +787,7 @@ router.get('/products-list', authenticate, async (req, res) => {
     const total = countResult[0]?.total || 0;
 
     // Get products with primary image and subcategory
+    // Note: Using template literals for LIMIT/OFFSET to avoid mysql2 prepared statement issues
     const products = await query(`
       SELECT p.product_id, p.product_name_en, p.product_name_ar,
              p.product_description_en, p.product_description_ar,
@@ -796,8 +802,8 @@ router.get('/products-list', authenticate, async (req, res) => {
       LEFT JOIN subcategories sc ON p.subcategory_id = sc.subcategory_id
       ${whereClause}
       ORDER BY p.created_at DESC
-      LIMIT ? OFFSET ?
-    `, [...params, parseInt(limit), offset]);
+      LIMIT ${limitNum} OFFSET ${offset}
+    `, params);
 
     res.json({
       success: true,
@@ -2489,7 +2495,9 @@ router.delete('/admin-users/:id', authenticate, async (req, res) => {
 router.get('/bill-images', authenticate, async (req, res) => {
   try {
     const { page = 1, limit = 12, bill_type = '', is_processed = '' } = req.query;
-    const offset = (parseInt(page) - 1) * parseInt(limit);
+    const pageNum = Math.max(1, parseInt(page) || 1);
+    const limitNum = Math.min(100, Math.max(1, parseInt(limit) || 12));
+    const offset = (pageNum - 1) * limitNum;
 
     let whereClause = 'WHERE 1=1';
     const params = [];
@@ -2516,17 +2524,17 @@ router.get('/bill-images', authenticate, async (req, res) => {
       LEFT JOIN admin_users a ON bi.uploaded_by = a.admin_id
       ${whereClause}
       ORDER BY bi.created_at DESC
-      LIMIT ? OFFSET ?
-    `, [...params, parseInt(limit), offset]);
+      LIMIT ${limitNum} OFFSET ${offset}
+    `, params);
 
     res.json({
       success: true,
       data: {
         billImages,
         total,
-        page: parseInt(page),
-        limit: parseInt(limit),
-        totalPages: Math.ceil(total / parseInt(limit))
+        page: pageNum,
+        limit: limitNum,
+        totalPages: Math.ceil(total / limitNum)
       }
     });
   } catch (error) {
@@ -2773,7 +2781,9 @@ router.delete('/bill-images/:id', authenticate, async (req, res) => {
 router.get('/invoices', authenticate, async (req, res) => {
   try {
     const { page = 1, limit = 10, search = '', status = '' } = req.query;
-    const offset = (parseInt(page) - 1) * parseInt(limit);
+    const pageNum = Math.max(1, parseInt(page) || 1);
+    const limitNum = Math.min(100, Math.max(1, parseInt(limit) || 10));
+    const offset = (pageNum - 1) * limitNum;
 
     let whereClause = 'WHERE 1=1';
     const params = [];
@@ -2810,8 +2820,8 @@ router.get('/invoices', authenticate, async (req, res) => {
       FROM orders o
       ${whereClause}
       ORDER BY o.created_at DESC
-      LIMIT ? OFFSET ?
-    `, [...params, parseInt(limit), offset]);
+      LIMIT ${limitNum} OFFSET ${offset}
+    `, params);
 
     // Map to invoice format
     const invoices = orders.map(o => ({
@@ -2835,9 +2845,9 @@ router.get('/invoices', authenticate, async (req, res) => {
       data: {
         invoices,
         total,
-        page: parseInt(page),
-        limit: parseInt(limit),
-        totalPages: Math.ceil(total / parseInt(limit))
+        page: pageNum,
+        limit: limitNum,
+        totalPages: Math.ceil(total / limitNum)
       }
     });
   } catch (error) {
@@ -2955,7 +2965,9 @@ router.put('/invoices/:id/paid', authenticate, async (req, res) => {
 router.get('/messages', authenticate, async (req, res) => {
   try {
     const { page = 1, limit = 10, status = '' } = req.query;
-    const offset = (parseInt(page) - 1) * parseInt(limit);
+    const pageNum = Math.max(1, parseInt(page) || 1);
+    const limitNum = Math.min(100, Math.max(1, parseInt(limit) || 10));
+    const offset = (pageNum - 1) * limitNum;
 
     let whereClause = 'WHERE 1=1';
     const params = [];
@@ -2977,8 +2989,8 @@ router.get('/messages', authenticate, async (req, res) => {
       FROM contact_messages m
       ${whereClause}
       ORDER BY m.created_at DESC
-      LIMIT ? OFFSET ?
-    `, [...params, parseInt(limit), offset]);
+      LIMIT ${limitNum} OFFSET ${offset}
+    `, params);
 
     // Map status to is_read for frontend compatibility
     const mappedMessages = messages.map(m => ({
@@ -2991,9 +3003,9 @@ router.get('/messages', authenticate, async (req, res) => {
       data: {
         messages: mappedMessages,
         total,
-        page: parseInt(page),
-        limit: parseInt(limit),
-        totalPages: Math.ceil(total / parseInt(limit))
+        page: pageNum,
+        limit: limitNum,
+        totalPages: Math.ceil(total / limitNum)
       }
     });
   } catch (error) {
@@ -3173,7 +3185,9 @@ router.delete('/messages/:id', authenticate, async (req, res) => {
 router.get('/reviews', authenticate, async (req, res) => {
   try {
     const { page = 1, limit = 10, status = '', rating = '' } = req.query;
-    const offset = (parseInt(page) - 1) * parseInt(limit);
+    const pageNum = Math.max(1, parseInt(page) || 1);
+    const limitNum = Math.min(100, Math.max(1, parseInt(limit) || 10));
+    const offset = (pageNum - 1) * limitNum;
 
     let whereClause = 'WHERE 1=1';
     const params = [];
@@ -3204,8 +3218,8 @@ router.get('/reviews', authenticate, async (req, res) => {
       LEFT JOIN products p ON r.product_id = p.product_id
       ${whereClause}
       ORDER BY r.created_at DESC
-      LIMIT ? OFFSET ?
-    `, [...params, parseInt(limit), offset]);
+      LIMIT ${limitNum} OFFSET ${offset}
+    `, params);
 
     // Map is_approved to status: 1=approved, 0=pending, -1=rejected
     const mappedReviews = reviews.map(r => ({
@@ -3218,9 +3232,9 @@ router.get('/reviews', authenticate, async (req, res) => {
       data: {
         reviews: mappedReviews,
         total,
-        page: parseInt(page),
-        limit: parseInt(limit),
-        totalPages: Math.ceil(total / parseInt(limit))
+        page: pageNum,
+        limit: limitNum,
+        totalPages: Math.ceil(total / limitNum)
       }
     });
   } catch (error) {
