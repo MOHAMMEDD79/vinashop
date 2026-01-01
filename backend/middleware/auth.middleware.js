@@ -566,7 +566,7 @@ const checkCredentials = (req, res, next) => {
   const origin = req.get('Origin');
   const allowedOrigins = process.env.ALLOWED_ORIGINS
     ? process.env.ALLOWED_ORIGINS.split(',')
-    : ['https://vinashop.ps', 'https://admin.vinashop.ps'];
+    : ['http://vinashop.ps', 'http://admin.vinashop.ps'];
 
   if (origin && allowedOrigins.includes(origin)) {
     res.header('Access-Control-Allow-Credentials', 'true');

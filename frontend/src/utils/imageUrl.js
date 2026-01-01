@@ -9,7 +9,7 @@
 
 // Get uploads base URL from environment variable
 // Falls back to VinaShop backend (port 5000) where images are stored
-const UPLOADS_BASE_URL = import.meta.env.VITE_UPLOADS_URL || 'https://api.vinashop.ps';
+const UPLOADS_BASE_URL = import.meta.env.VITE_UPLOADS_URL || 'http://api.vinashop.ps';
 
 /**
  * Get the full URL for an image/media path

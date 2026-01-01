@@ -1,15 +1,102 @@
 
 ﻿
-react-dom_client.js?v=29c1438e:20103 Download the React DevTools for a better development experience: https://react.dev/link/react-devtools
-api.js:104 
- GET http://localhost:5000/api/public/products/2?lang=ar 500 (Internal Server Error)
-api.js:18 API Error: 
-{success: false, message: "Table 'vinashop.users' doesn't exist", error_code: 'INTERNAL_ERROR', errorCode: 'INTERNAL_ERROR', status: 500, …}
-ProductDetailPage.jsx:55 Error fetching product: 
-{success: false, message: "Table 'vinashop.users' doesn't exist", error_code: 'INTERNAL_ERROR', errorCode: 'INTERNAL_ERROR', status: 500, …}
-api.js:104 
- GET http://localhost:5000/api/public/products/2?lang=ar 500 (Internal Server Error)
-api.js:18 API Error: 
-{success: false, message: "Table 'vinashop.users' doesn't exist", error_code: 'INTERNAL_ERROR', errorCode: 'INTERNAL_ERROR', status: 500, …}
-ProductDetailPage.jsx:55 Error fetching product: 
-{success: false, message: "Table 'vinashop.users' doesn't exist", error_code: 'INTERNAL_ERROR', errorCode: 'INTERNAL_ERROR', status: 500, …}
+react-dom_client.js?v=5aada0fe:20103 Download the React DevTools for a better development experience: https://react.dev/link/react-devtools
+api.vinashop.ps/api/…=&page=1&limit=10:1 
+ Failed to load resource: the server responded with a status of 500 (Internal Server Error)
+Products.jsx:64 Error fetching products: 
+AxiosError
+api.vinashop.ps/api/…=&page=1&limit=10:1 
+ Failed to load resource: the server responded with a status of 500 (Internal Server Error)
+Products.jsx:64 Error fetching products: 
+AxiosError
+ 
+ GET http://api.vinashop.ps/api/admin/v1/subcategories/category/1/tree 404 (Not Found)
+Products.jsx:110 Error fetching subcategories: 
+AxiosError {message: 'Request failed with status code 404', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}
+Products.jsx:57 
+ GET http://api.vinashop.ps/api/admin/v1/test/products-list?search=&category_id=&status=&page=1&limit=10 500 (Internal Server Error)
+Products.jsx:64 Error fetching products: 
+AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+Orders.jsx:23 
+ GET http://api.vinashop.ps/api/admin/v1/test/orders?search=&status=&page=1&limit=10 500 (Internal Server Error)
+Orders.jsx:29 Error fetching orders: 
+AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+Orders.jsx:23 
+ GET http://api.vinashop.ps/api/admin/v1/test/orders?search=&status=&page=1&limit=10 500 (Internal Server Error)
+Orders.jsx:29 Error fetching orders: 
+AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+Reviews.jsx:20 
+ GET http://api.vinashop.ps/api/admin/v1/test/reviews?status=&rating=&page=1&limit=10 500 (Internal Server Error)
+Reviews.jsx:24 Error fetching reviews: 
+AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+Reviews.jsx:20 
+ GET http://api.vinashop.ps/api/admin/v1/test/reviews?status=&rating=&page=1&limit=10 500 (Internal Server Error)
+Reviews.jsx:24 Error fetching reviews: 
+AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+Messages.jsx:21 
+ GET http://api.vinashop.ps/api/admin/v1/test/messages?status=&page=1&limit=10 500 (Internal Server Error)
+Messages.jsx:25 Error fetching messages: 
+AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+Messages.jsx:21 
+ GET http://api.vinashop.ps/api/admin/v1/test/messages?status=&page=1&limit=10 500 (Internal Server Error)
+Messages.jsx:25 Error fetching messages: 
+AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+api.js:266 
+ GET http://api.vinashop.ps/api/admin/v1/customer-bills?search=&payment_status=&page=1&limit=10 500 (Internal Server Error)
+CustomerBills.jsx:93 Error fetching bills: 
+AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+api.js:266 
+ GET http://api.vinashop.ps/api/admin/v1/customer-bills?search=&payment_status=&page=1&limit=10 500 (Internal Server Error)
+CustomerBills.jsx:93 Error fetching bills: 
+AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+api.js:291 
+ GET http://api.vinashop.ps/api/admin/v1/customer-debts/overdue?limit=5 500 (Internal Server Error)
+CustomerDebts.jsx:86 Error fetching overdue debts: 
+AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+api.js:283 
+ GET http://api.vinashop.ps/api/admin/v1/customer-debts?search=&status=&page=1&limit=10 500 (Internal Server Error)
+CustomerDebts.jsx:65 Error fetching debts: 
+AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+api.js:291 
+ GET http://api.vinashop.ps/api/admin/v1/customer-debts/overdue?limit=5 500 (Internal Server Error)
+CustomerDebts.jsx:86 Error fetching overdue debts: 
+AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+api.js:283 
+ GET http://api.vinashop.ps/api/admin/v1/customer-debts?search=&status=&page=1&limit=10 500 (Internal Server Error)
+CustomerDebts.jsx:65 Error fetching debts: 
+AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+Billing.jsx:22 
+ GET http://api.vinashop.ps/api/admin/v1/test/invoices?search=&status=&page=1&limit=10 500 (Internal Server Error)
+Billing.jsx:26 Error fetching invoices: 
+AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+Billing.jsx:22 
+ GET http://api.vinashop.ps/api/admin/v1/test/invoices?search=&status=&page=1&limit=10 500 (Internal Server Error)
+Billing.jsx:26 Error fetching invoices: 
+AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+api.js:341 
+ GET http://api.vinashop.ps/api/admin/v1/wholesalers?search=&status=&page=1&limit=10 500 (Internal Server Error)
+Wholesalers.jsx:97 Error fetching wholesalers: 
+AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+api.js:341 
+ GET http://api.vinashop.ps/api/admin/v1/wholesalers?search=&status=&page=1&limit=10 500 (Internal Server Error)
+Wholesalers.jsx:97 Error fetching wholesalers: 
+AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+api.js:299 
+ GET http://api.vinashop.ps/api/admin/v1/workers?search=&status=&page=1&limit=10 500 (Internal Server Error)
+Workers.jsx:112 Error fetching workers: 
+AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+api.js:299 
+ GET http://api.vinashop.ps/api/admin/v1/workers?search=&status=&page=1&limit=10 500 (Internal Server Error)
+Workers.jsx:112 Error fetching workers: 
+AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+api.js:322 
+ GET http://api.vinashop.ps/api/admin/v1/traders?search=&status=&page=1&limit=10 500 (Internal Server Error)
+Traders.jsx:99 Error fetching traders: 
+AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+api.js:322 
+ GET http://api.vinashop.ps/api/admin/v1/traders?search=&status=&page=1&limit=10 500 (Internal Server Error)
+Traders.jsx:99 Error fetching traders: 
+AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+BillImages.jsx:29 
+ GET http://api.vinashop.ps/api/admin/v1/test/bill-images?bill_type=&is_processed=&page=1&limit=12 500 (Internal Server Error)
+ {"success":false,"message":"Route GET / not found","error_code":"ROUTE_NOT_FOUND","errorCode":"ROUTE_NOT_FOUND","status":404,"stack":"Error: Route GET / not found\n    at notFoundHandler (/home/vinaskap/api.vinashop.ps/middleware/error.middleware.js:64:17)\n    at Layer.handle [as handle_request] (/home/vinaskap/nodevenv/api.vinashop.ps/20/lib/node_modules/express/lib/router/layer.js:95:5)\n    at trim_prefix (/home/vinaskap/nodevenv/api.vinashop.ps/20/lib/node_modules/express/lib/router/index.js:328:13)\n    at /home/vinaskap/nodevenv/api.vinashop.ps/20/lib/node_modules/express/lib/router/index.js:286:9\n    at Function.process_params (/home/vinaskap/nodevenv/api.vinashop.ps/20/lib/node_modules/express/lib/router/index.js:346:12)\n    at next (/home/vinaskap/nodevenv/api.vinashop.ps/20/lib/node_modules/express/lib/router/index.js:280:10)\n    at logger (/home/vinaskap/nodevenv/api.vinashop.ps/20/lib/node_modules/morgan/index.js:144:5)\n    at Layer.handle [as handle_request] (/home/vinaskap/nodevenv/api.vinashop.ps/20/lib/node_modules/express/lib/router/layer.js:95:5)\n    at trim_prefix (/home/vinaskap/nodevenv/api.vinashop.ps/20/lib/node_modules/express/lib/router/index.js:328:13)\n    at /home/vinaskap/nodevenv/api.vinashop.ps/20/lib/node_modules/express/lib/router/index.js:286:9"}

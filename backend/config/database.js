@@ -323,15 +323,21 @@ const getPoolStats = () => {
   };
 };
 
-// Handle process termination
+// Handle process termination gracefully (avoid process.exit for Passenger/cPanel)
 process.on('SIGINT', async () => {
-  await closePool();
-  process.exit(0);
+  try {
+    await closePool();
+  } catch (e) {
+    console.error('Error closing pool on SIGINT:', e);
+  }
 });
 
 process.on('SIGTERM', async () => {
-  await closePool();
-  process.exit(0);
+  try {
+    await closePool();
+  } catch (e) {
+    console.error('Error closing pool on SIGTERM:', e);
+  }
 });
 
 module.exports = {
