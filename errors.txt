@@ -1,0 +1,15 @@
+
+﻿
+react-dom_client.js?v=29c1438e:20103 Download the React DevTools for a better development experience: https://react.dev/link/react-devtools
+api.js:104 
+ GET http://localhost:5000/api/public/products/2?lang=ar 500 (Internal Server Error)
+api.js:18 API Error: 
+{success: false, message: "Table 'vinashop.users' doesn't exist", error_code: 'INTERNAL_ERROR', errorCode: 'INTERNAL_ERROR', status: 500, …}
+ProductDetailPage.jsx:55 Error fetching product: 
+{success: false, message: "Table 'vinashop.users' doesn't exist", error_code: 'INTERNAL_ERROR', errorCode: 'INTERNAL_ERROR', status: 500, …}
+api.js:104 
+ GET http://localhost:5000/api/public/products/2?lang=ar 500 (Internal Server Error)
+api.js:18 API Error: 
+{success: false, message: "Table 'vinashop.users' doesn't exist", error_code: 'INTERNAL_ERROR', errorCode: 'INTERNAL_ERROR', status: 500, …}
+ProductDetailPage.jsx:55 Error fetching product: 
+{success: false, message: "Table 'vinashop.users' doesn't exist", error_code: 'INTERNAL_ERROR', errorCode: 'INTERNAL_ERROR', status: 500, …}

@@ -1,0 +1,169 @@
+{
+  "app": {
+    "name": "VinaShop",
+    "tagline": "Bag & Accessories"
+  },
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "about": "About Us",
+    "contact": "Contact Us",
+    "cart": "Cart",
+    "search": "Search products..."
+  },
+  "home": {
+    "hero": {
+      "title": "Welcome to VinaShop",
+      "subtitle": "Discover our collection of bags, accessories, and more",
+      "shopNow": "Shop Now"
+    },
+    "featured": "Featured Products",
+    "newArrivals": "New Arrivals",
+    "bestSellers": "Best Sellers",
+    "categories": "Shop by Category",
+    "viewAll": "View All"
+  },
+  "products": {
+    "title": "Products",
+    "all": "All Products",
+    "filters": "Filters",
+    "clearFilters": "Clear Filters",
+    "sort": "Sort by",
+    "showing": "Showing",
+    "of": "of",
+    "results": "results",
+    "noResults": "No products found",
+    "tryDifferent": "Try adjusting your filters or search terms",
+    "price": "Price",
+    "priceRange": "Price Range",
+    "color": "Color",
+    "colors": "Colors",
+    "size": "Size",
+    "sizes": "Sizes",
+    "category": "Category",
+    "subcategory": "Subcategory",
+    "minPrice": "Min Price",
+    "maxPrice": "Max Price",
+    "apply": "Apply"
+  },
+  "product": {
+    "addToCart": "Add to Cart",
+    "buyNow": "Buy Now",
+    "outOfStock": "Out of Stock",
+    "inStock": "In Stock",
+    "quantity": "Quantity",
+    "selectSize": "Select Size",
+    "selectColor": "Select Color",
+    "description": "Description",
+    "details": "Details",
+    "reviews": "Reviews",
+    "noReviews": "No reviews yet",
+    "similarProducts": "Similar Products",
+    "sku": "SKU",
+    "share": "Share",
+    "discount": "OFF"
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "empty": "Your cart is empty",
+    "continueShopping": "Continue Shopping",
+    "item": "Item",
+    "items": "Items",
+    "price": "Price",
+    "quantity": "Quantity",
+    "total": "Total",
+    "subtotal": "Subtotal",
+    "remove": "Remove",
+    "checkout": "Proceed to Checkout",
+    "updateCart": "Update Cart"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "customerInfo": "Customer Information",
+    "deliveryInfo": "Delivery Information",
+    "orderSummary": "Order Summary",
+    "fullName": "Full Name",
+    "phone": "Phone Number",
+    "address": "Street / Village Address",
+    "deliveryArea": "Delivery Area",
+    "selectArea": "Select delivery area",
+    "notes": "Order Notes (Optional)",
+    "notesPlaceholder": "Any special instructions for your order...",
+    "subtotal": "Subtotal",
+    "delivery": "Delivery Fee",
+    "total": "Total",
+    "placeOrder": "Place Order",
+    "cashOnDelivery": "Cash on Delivery",
+    "paymentNote": "Payment will be collected upon delivery",
+    "processing": "Processing your order...",
+    "areas": {
+      "israel_48": "48 Areas",
+      "jerusalem": "Jerusalem",
+      "west_bank": "West Bank"
+    }
+  },
+  "orderConfirmation": {
+    "title": "Order Confirmed!",
+    "thankYou": "Thank you for your order",
+    "orderNumber": "Order Number",
+    "message": "We have received your order and will contact you soon to confirm the details.",
+    "continueShopping": "Continue Shopping"
+  },
+  "about": {
+    "title": "About Us",
+    "story": "Our Story",
+    "mission": "Our Mission",
+    "values": "Our Values"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "getInTouch": "Get in Touch",
+    "name": "Your Name",
+    "email": "Email Address",
+    "phone": "Phone Number",
+    "subject": "Subject",
+    "message": "Message",
+    "send": "Send Message",
+    "sending": "Sending...",
+    "success": "Message sent successfully!",
+    "error": "Failed to send message. Please try again.",
+    "address": "Address",
+    "followUs": "Follow Us"
+  },
+  "footer": {
+    "about": "About VinaShop",
+    "aboutText": "Your destination for quality bags, accessories, and fashion items.",
+    "quickLinks": "Quick Links",
+    "customerService": "Customer Service",
+    "contactInfo": "Contact Info",
+    "rights": "All rights reserved",
+    "shipping": "Shipping Info",
+    "returns": "Returns Policy",
+    "faq": "FAQ"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "tryAgain": "Try Again",
+    "close": "Close",
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "search": "Search",
+    "noData": "No data available",
+    "required": "Required",
+    "optional": "Optional"
+  },
+  "validation": {
+    "required": "This field is required",
+    "invalidPhone": "Please enter a valid phone number",
+    "invalidEmail": "Please enter a valid email address",
+    "selectDeliveryArea": "Please select a delivery area",
+    "cartEmpty": "Your cart is empty",
+    "selectSize": "Please select a size",
+    "selectColor": "Please select a color"
+  }
+}

@@ -1,0 +1,15 @@
+/* Order Confirmation Page */
+.confirmation-page { min-height: 60vh; display: flex; align-items: center; justify-content: center; padding: var(--spacing-3xl) 0; }
+.confirmation-content { text-align: center; max-width: 500px; margin: 0 auto; }
+.success-icon { margin-bottom: var(--spacing-xl); }
+.success-icon svg { width: 80px; height: 80px; color: var(--color-success); }
+.confirmation-content h1 { font-size: var(--font-3xl); margin-bottom: var(--spacing-md); color: var(--color-success); }
+.thank-you { font-size: var(--font-xl); font-weight: 500; margin-bottom: var(--spacing-md); }
+.message { color: var(--color-text-secondary); margin-bottom: var(--spacing-xl); line-height: 1.6; }
+.confirmation-actions { display: flex; gap: var(--spacing-md); justify-content: center; flex-wrap: wrap; }
+.confirmation-actions .btn { display: inline-flex; align-items: center; gap: var(--spacing-sm); }
+
+@media (max-width: 480px) {
+  .confirmation-actions { flex-direction: column; }
+  .confirmation-actions .btn { width: 100%; justify-content: center; }
+}

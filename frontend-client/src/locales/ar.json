@@ -1,0 +1,169 @@
+{
+  "app": {
+    "name": "VinaShop",
+    "tagline": "شنط وإكسسوارات"
+  },
+  "nav": {
+    "home": "الرئيسية",
+    "products": "المنتجات",
+    "about": "من نحن",
+    "contact": "اتصل بنا",
+    "cart": "السلة",
+    "search": "ابحث عن منتجات..."
+  },
+  "home": {
+    "hero": {
+      "title": "مرحباً بكم في VinaShop",
+      "subtitle": "اكتشف مجموعتنا من الشنتات والاكسسوارات والمزيد",
+      "shopNow": "تسوق الآن"
+    },
+    "featured": "منتجات مميزة",
+    "newArrivals": "وصل حديثاً",
+    "bestSellers": "الأكثر مبيعاً",
+    "categories": "تصفح جميع الأصناف",
+    "viewAll": "عرض الكل"
+  },
+  "products": {
+    "title": "المنتجات",
+    "all": "جميع المنتجات",
+    "filters": "اختاري فئتك",
+    "clearFilters": "مسح الاختيارات",
+    "sort": "ترتيب حسب",
+    "showing": "عرض",
+    "of": "من",
+    "results": "نتيجة",
+    "noResults": "لا توجد منتجات",
+    "tryDifferent": "حاول تعديل التصفية أو كلمات البحث",
+    "price": "السعر",
+    "priceRange": "نطاق السعر",
+    "color": "اللون",
+    "colors": "الألوان",
+    "size": "المقاس",
+    "sizes": "المقاسات",
+    "category": "الفئة",
+    "subcategory": "الفئة الفرعية",
+    "minPrice": "أقل سعر",
+    "maxPrice": "أعلى سعر",
+    "apply": "تطبيق"
+  },
+  "product": {
+    "addToCart": "أضف للسلة",
+    "buyNow": "اشتري الآن",
+    "outOfStock": "غير متوفر",
+    "inStock": "متوفر",
+    "quantity": "الكمية",
+    "selectSize": "اختر المقاس",
+    "selectColor": "اختر اللون",
+    "description": "الوصف",
+    "details": "التفاصيل",
+    "reviews": "التقييمات",
+    "noReviews": "لا توجد تقييمات حتى الآن",
+    "similarProducts": "منتجات مشابهة",
+    "sku": "رقم المنتج",
+    "share": "مشاركة",
+    "discount": "خصم"
+  },
+  "cart": {
+    "title": "سلة التسوق",
+    "empty": "سلة التسوق فارغة",
+    "continueShopping": "متابعة التسوق",
+    "item": "منتج",
+    "items": "منتجات",
+    "price": "السعر",
+    "quantity": "الكمية",
+    "total": "المجموع",
+    "subtotal": "المجموع الفرعي",
+    "remove": "إزالة",
+    "checkout": "إتمام الشراء",
+    "updateCart": "تحديث السلة"
+  },
+  "checkout": {
+    "title": "إتمام الطلب",
+    "customerInfo": "معلومات العميل",
+    "deliveryInfo": "معلومات التوصيل",
+    "orderSummary": "ملخص الطلب",
+    "fullName": "الاسم الكامل",
+    "phone": "رقم الهاتف",
+    "address": "العنوان / الشارع / القرية",
+    "deliveryArea": "منطقة التوصيل",
+    "selectArea": "اختر منطقة التوصيل",
+    "notes": "ملاحظات على الطلب (اختياري)",
+    "notesPlaceholder": "أي تعليمات خاصة لطلبك...",
+    "subtotal": "المجموع الفرعي",
+    "delivery": "رسوم التوصيل",
+    "total": "المجموع الكلي",
+    "placeOrder": "تأكيد الطلب",
+    "cashOnDelivery": "الدفع عند الاستلام",
+    "paymentNote": "سيتم تحصيل المبلغ عند التوصيل",
+    "processing": "جاري معالجة طلبك...",
+    "areas": {
+      "israel_48": "الداخل 48",
+      "jerusalem": "القدس",
+      "west_bank": "الضفة الغربية"
+    }
+  },
+  "orderConfirmation": {
+    "title": "تم تأكيد الطلب!",
+    "thankYou": "شكراً لطلبك",
+    "orderNumber": "رقم الطلب",
+    "message": "لقد استلمنا طلبك وسنتواصل معك قريباً لتأكيد التفاصيل.",
+    "continueShopping": "متابعة التسوق"
+  },
+  "about": {
+    "title": "من نحن",
+    "story": "قصتنا",
+    "mission": "مهمتنا",
+    "values": "قيمنا"
+  },
+  "contact": {
+    "title": "اتصل بنا",
+    "getInTouch": "تواصل معنا",
+    "name": "اسمك",
+    "email": "البريد الإلكتروني",
+    "phone": "رقم الهاتف",
+    "subject": "الموضوع",
+    "message": "الرسالة",
+    "send": "إرسال الرسالة",
+    "sending": "جاري الإرسال...",
+    "success": "تم إرسال الرسالة بنجاح!",
+    "error": "فشل إرسال الرسالة. حاول مرة أخرى.",
+    "address": "العنوان",
+    "followUs": "تابعنا"
+  },
+  "footer": {
+    "about": "عن VinaShop",
+    "aboutText": "وجهتك للحصول على شنتات وإكسسوارات وأزياء عالية الجودة.",
+    "quickLinks": "روابط سريعة",
+    "customerService": "خدمة العملاء",
+    "contactInfo": "معلومات التواصل",
+    "rights": "جميع الحقوق محفوظة",
+    "shipping": "معلومات الشحن",
+    "returns": "سياسة الإرجاع",
+    "faq": "الأسئلة الشائعة"
+  },
+  "common": {
+    "loading": "جاري التحميل...",
+    "error": "حدث خطأ ما",
+    "tryAgain": "حاول مرة أخرى",
+    "close": "إغلاق",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "confirm": "تأكيد",
+    "back": "رجوع",
+    "next": "التالي",
+    "previous": "السابق",
+    "search": "بحث",
+    "noData": "لا توجد بيانات",
+    "required": "مطلوب",
+    "optional": "اختياري"
+  },
+  "validation": {
+    "required": "هذا الحقل مطلوب",
+    "invalidPhone": "يرجى إدخال رقم هاتف صحيح",
+    "invalidEmail": "يرجى إدخال بريد إلكتروني صحيح",
+    "selectDeliveryArea": "يرجى اختيار منطقة التوصيل",
+    "cartEmpty": "سلة التسوق فارغة",
+    "selectSize": "يرجى اختيار المقاس",
+    "selectColor": "يرجى اختيار اللون"
+  }
+}

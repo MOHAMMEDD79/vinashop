@@ -1,0 +1,398 @@
+/* Dashboard Analytics Styles */
+
+.dashboard {
+  padding-bottom: 30px;
+}
+
+/* Page Header */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 25px;
+}
+
+.page-subtitle {
+  color: var(--secondary);
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+.refresh-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.refresh-btn svg.spinning {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Section Titles */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--dark);
+  margin: 30px 0 15px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--border);
+}
+
+.section-title svg {
+  color: var(--primary);
+}
+
+/* Stats Grid Variations */
+.stats-grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.stats-grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 1200px) {
+  .stats-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .stats-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .stats-grid-4,
+  .stats-grid-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Enhanced Stat Cards */
+.stat-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card.highlight {
+  background: linear-gradient(135deg, #faf5e8 0%, #fff 100%);
+  border: 1px solid var(--primary);
+}
+
+.stat-card.large {
+  padding: 25px;
+}
+
+.stat-card.warning {
+  border-left: 4px solid var(--warning);
+}
+
+.stat-card.danger {
+  border-left: 4px solid var(--danger);
+}
+
+.stat-value {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--dark);
+  margin: 0;
+}
+
+.stat-value.large {
+  font-size: 2.2rem;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--secondary);
+  margin-top: 5px;
+}
+
+.stat-change {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.stat-change.positive {
+  color: var(--success);
+}
+
+.stat-change.negative {
+  color: var(--danger);
+}
+
+.stat-change.neutral {
+  color: var(--secondary);
+}
+
+.change-icon {
+  font-size: 0.9rem;
+}
+
+.change-icon.up {
+  color: var(--success);
+}
+
+.change-icon.down {
+  color: var(--danger);
+}
+
+/* Stat Icon Variations */
+.stat-icon.gold {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  color: #d4af37;
+}
+
+.stat-icon.gray {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+.stat-icon.large {
+  width: 60px;
+  height: 60px;
+  font-size: 1.8rem;
+}
+
+/* Charts Row */
+.charts-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  margin: 20px 0;
+}
+
+@media (max-width: 1024px) {
+  .charts-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Chart Cards */
+.chart-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.chart-card .card-header {
+  padding: 15px 20px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0;
+}
+
+.chart-card .card-header h2 {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.chart-container {
+  padding: 20px;
+  min-height: 300px;
+}
+
+.empty-chart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  color: var(--secondary);
+  font-size: 0.95rem;
+}
+
+/* Data Row (Two Column Layout) */
+.data-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 20px 0;
+}
+
+@media (max-width: 1024px) {
+  .data-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Table Enhancements */
+.rank-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.revenue-cell {
+  color: var(--success);
+  font-weight: 600;
+}
+
+.stock-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.stock-badge.critical {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.stock-badge.warning {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+/* Warning Icon */
+.warning-icon {
+  color: var(--warning);
+}
+
+/* Empty State Enhancements */
+.empty-state.success {
+  color: var(--success);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.empty-state.success svg {
+  font-size: 2rem;
+}
+
+/* Summary Footer */
+.summary-footer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-top: 30px;
+  padding: 20px;
+  background: linear-gradient(135deg, var(--dark) 0%, #4a3f35 100%);
+  border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+  .summary-footer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.summary-item {
+  text-align: center;
+  padding: 10px;
+}
+
+.summary-label {
+  display: block;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.8rem;
+  margin-bottom: 5px;
+}
+
+.summary-value {
+  display: block;
+  color: white;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+/* Code styling for SKU */
+code {
+  background: #f1f5f9;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  color: var(--secondary);
+}
+
+/* RTL Support */
+body.rtl .stat-card {
+  flex-direction: row-reverse;
+}
+
+body.rtl .stat-change {
+  flex-direction: row-reverse;
+}
+
+body.rtl .section-title {
+  flex-direction: row-reverse;
+}
+
+body.rtl .charts-row {
+  direction: rtl;
+}
+
+body.rtl .data-row {
+  direction: rtl;
+}
+
+body.rtl .summary-footer {
+  direction: rtl;
+}
+
+body.rtl .stat-card.warning {
+  border-left: none;
+  border-right: 4px solid var(--warning);
+}
+
+body.rtl .stat-card.danger {
+  border-left: none;
+  border-right: 4px solid var(--danger);
+}
+
+/* Recharts RTL Support */
+body.rtl .recharts-wrapper {
+  direction: ltr;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 480px) {
+  .page-header {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .refresh-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .stat-value {
+    font-size: 1.5rem;
+  }
+
+  .stat-value.large {
+    font-size: 1.8rem;
+  }
+
+  .summary-value {
+    font-size: 1.1rem;
+  }
+}
