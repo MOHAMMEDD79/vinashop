@@ -4,8 +4,9 @@
  */
 
 const CustomerBill = require('../models/customerBill.model');
-const User = require('../models/user.model');
 const Order = require('../models/order.model');
+// Note: User model removed - users table does not exist in this database
+// Customer info is stored directly in customer_name and customer_phone fields
 
 class CustomerBillService {
   /**
@@ -38,13 +39,11 @@ class CustomerBillService {
   }
 
   /**
-   * Get bills by user ID
+   * Get bills by user ID (legacy support)
    */
   static async getByUserId(userId, options = {}) {
-    const user = await User.getById(userId);
-    if (!user) {
-      throw new Error('User not found');
-    }
+    // Note: users table doesn't exist, but we still support filtering by user_id
+    // for any bills that may have been created with a user_id value
     return await CustomerBill.getByUserId(userId, options);
   }
 
@@ -52,13 +51,8 @@ class CustomerBillService {
    * Create new customer bill
    */
   static async create(data, createdBy) {
-    // Validate user
-    if (data.user_id) {
-      const user = await User.getById(data.user_id);
-      if (!user) {
-        throw new Error('User not found');
-      }
-    }
+    // Note: user_id validation removed - users table doesn't exist
+    // Customer info is stored via customer_name and customer_phone
 
     // Validate order if provided
     if (data.order_id) {
@@ -95,14 +89,7 @@ class CustomerBillService {
       throw new Error('Bill not found');
     }
 
-    // Validate user if changing
-    if (data.user_id && data.user_id !== bill.user_id) {
-      const user = await User.getById(data.user_id);
-      if (!user) {
-        throw new Error('User not found');
-      }
-    }
-
+    // Note: user_id validation removed - users table doesn't exist
     return await CustomerBill.update(billId, data);
   }
 

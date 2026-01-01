@@ -2,10 +2,10 @@
 -- version 5.2.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Dec 31, 2025 at 11:15 PM
--- Server version: 8.0.33-cll-lve
--- PHP Version: 8.4.16
+-- مضيف: localhost:3306
+-- وقت الجيل: 01 يناير 2026 الساعة 20:27
+-- إصدار الخادم: 8.0.33-cll-lve
+-- نسخة PHP: 8.4.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `vinaskap_vinashop`
+-- قاعدة بيانات: `vinaskap_vinashop`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admins`
+-- بنية الجدول `admins`
 --
 
 CREATE TABLE `admins` (
@@ -42,7 +42,7 @@ CREATE TABLE `admins` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `admins`
+-- إرجاع أو استيراد بيانات الجدول `admins`
 --
 
 INSERT INTO `admins` (`admin_id`, `email`, `password`, `first_name`, `last_name`, `role`, `is_active`, `avatar`, `phone`, `created_at`, `updated_at`) VALUES
@@ -51,7 +51,7 @@ INSERT INTO `admins` (`admin_id`, `email`, `password`, `first_name`, `last_name`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin_activity_log`
+-- بنية الجدول `admin_activity_log`
 --
 
 CREATE TABLE `admin_activity_log` (
@@ -72,7 +72,7 @@ CREATE TABLE `admin_activity_log` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin_traders`
+-- بنية الجدول `admin_traders`
 --
 
 CREATE TABLE `admin_traders` (
@@ -95,7 +95,7 @@ CREATE TABLE `admin_traders` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin_users`
+-- بنية الجدول `admin_users`
 --
 
 CREATE TABLE `admin_users` (
@@ -111,7 +111,7 @@ CREATE TABLE `admin_users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `admin_users`
+-- إرجاع أو استيراد بيانات الجدول `admin_users`
 --
 
 INSERT INTO `admin_users` (`admin_id`, `username`, `email`, `password_hash`, `full_name`, `role`, `is_active`, `created_at`, `updated_at`) VALUES
@@ -120,7 +120,7 @@ INSERT INTO `admin_users` (`admin_id`, `username`, `email`, `password_hash`, `fu
 -- --------------------------------------------------------
 
 --
--- Table structure for table `banners`
+-- بنية الجدول `banners`
 --
 
 CREATE TABLE `banners` (
@@ -143,7 +143,7 @@ CREATE TABLE `banners` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `banners`
+-- إرجاع أو استيراد بيانات الجدول `banners`
 --
 
 INSERT INTO `banners` (`banner_id`, `title_en`, `title_ar`, `subtitle_en`, `subtitle_ar`, `media_path`, `media_type`, `mime_type`, `link_type`, `link_value`, `display_order`, `is_active`, `start_date`, `end_date`, `created_at`, `updated_at`) VALUES
@@ -152,7 +152,7 @@ INSERT INTO `banners` (`banner_id`, `title_en`, `title_ar`, `subtitle_en`, `subt
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bill_images`
+-- بنية الجدول `bill_images`
 --
 
 CREATE TABLE `bill_images` (
@@ -173,7 +173,7 @@ CREATE TABLE `bill_images` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bill_sequences`
+-- بنية الجدول `bill_sequences`
 --
 
 CREATE TABLE `bill_sequences` (
@@ -188,7 +188,7 @@ CREATE TABLE `bill_sequences` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cart_items`
+-- بنية الجدول `cart_items`
 --
 
 CREATE TABLE `cart_items` (
@@ -205,7 +205,7 @@ CREATE TABLE `cart_items` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categories`
+-- بنية الجدول `categories`
 --
 
 CREATE TABLE `categories` (
@@ -222,10 +222,17 @@ CREATE TABLE `categories` (
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- إرجاع أو استيراد بيانات الجدول `categories`
+--
+
+INSERT INTO `categories` (`category_id`, `category_name_en`, `category_name_ar`, `category_description_en`, `category_description_ar`, `category_image`, `display_order`, `is_featured`, `is_active`, `created_at`, `updated_at`) VALUES
+(1, 'asd', 'asd', NULL, NULL, NULL, 0, 0, 1, '2026-01-01 16:03:41', '2026-01-01 16:03:41');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `contact_messages`
+-- بنية الجدول `contact_messages`
 --
 
 CREATE TABLE `contact_messages` (
@@ -247,7 +254,7 @@ CREATE TABLE `contact_messages` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customer_bills`
+-- بنية الجدول `customer_bills`
 --
 
 CREATE TABLE `customer_bills` (
@@ -272,7 +279,7 @@ CREATE TABLE `customer_bills` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Triggers `customer_bills`
+-- القوادح `customer_bills`
 --
 DELIMITER $$
 CREATE TRIGGER `after_bill_payment_update` AFTER UPDATE ON `customer_bills` FOR EACH ROW BEGIN
@@ -292,7 +299,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customer_bill_items`
+-- بنية الجدول `customer_bill_items`
 --
 
 CREATE TABLE `customer_bill_items` (
@@ -310,7 +317,7 @@ CREATE TABLE `customer_bill_items` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customer_debts`
+-- بنية الجدول `customer_debts`
 --
 
 CREATE TABLE `customer_debts` (
@@ -334,7 +341,7 @@ CREATE TABLE `customer_debts` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `debt_payments`
+-- بنية الجدول `debt_payments`
 --
 
 CREATE TABLE `debt_payments` (
@@ -351,7 +358,7 @@ CREATE TABLE `debt_payments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Triggers `debt_payments`
+-- القوادح `debt_payments`
 --
 DELIMITER $$
 CREATE TRIGGER `after_debt_payment_insert` AFTER INSERT ON `debt_payments` FOR EACH ROW BEGIN
@@ -367,7 +374,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `guest_carts`
+-- بنية الجدول `guest_carts`
 --
 
 CREATE TABLE `guest_carts` (
@@ -386,7 +393,7 @@ CREATE TABLE `guest_carts` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `invoices`
+-- بنية الجدول `invoices`
 --
 
 CREATE TABLE `invoices` (
@@ -420,7 +427,7 @@ CREATE TABLE `invoices` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `invoice_items`
+-- بنية الجدول `invoice_items`
 --
 
 CREATE TABLE `invoice_items` (
@@ -439,7 +446,7 @@ CREATE TABLE `invoice_items` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `migrations`
+-- بنية الجدول `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -450,7 +457,7 @@ CREATE TABLE `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `migrations`
+-- إرجاع أو استيراد بيانات الجدول `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `name`, `executed_at`, `checksum`) VALUES
@@ -463,7 +470,7 @@ INSERT INTO `migrations` (`id`, `name`, `executed_at`, `checksum`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `notifications`
+-- بنية الجدول `notifications`
 --
 
 CREATE TABLE `notifications` (
@@ -480,7 +487,7 @@ CREATE TABLE `notifications` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `orders`
+-- بنية الجدول `orders`
 --
 
 CREATE TABLE `orders` (
@@ -513,7 +520,7 @@ CREATE TABLE `orders` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `order_items`
+-- بنية الجدول `order_items`
 --
 
 CREATE TABLE `order_items` (
@@ -532,7 +539,7 @@ CREATE TABLE `order_items` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `order_status_history`
+-- بنية الجدول `order_status_history`
 --
 
 CREATE TABLE `order_status_history` (
@@ -548,7 +555,7 @@ CREATE TABLE `order_status_history` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `payments`
+-- بنية الجدول `payments`
 --
 
 CREATE TABLE `payments` (
@@ -575,7 +582,7 @@ CREATE TABLE `payments` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `phone_otps`
+-- بنية الجدول `phone_otps`
 --
 
 CREATE TABLE `phone_otps` (
@@ -592,7 +599,7 @@ CREATE TABLE `phone_otps` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `products`
+-- بنية الجدول `products`
 --
 
 CREATE TABLE `products` (
@@ -618,10 +625,19 @@ CREATE TABLE `products` (
   `average_rating` decimal(3,2) DEFAULT '0.00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- إرجاع أو استيراد بيانات الجدول `products`
+--
+
+INSERT INTO `products` (`product_id`, `category_id`, `subcategory_id`, `product_name_en`, `product_name_ar`, `product_description_en`, `product_description_ar`, `base_price`, `discount_percentage`, `sku`, `stock_quantity`, `is_active`, `is_featured`, `view_count`, `rating_average`, `rating_count`, `meta_keywords`, `created_at`, `updated_at`, `average_rating`) VALUES
+(1, 1, NULL, 'asd', 'asd', '', '', 10.00, 0.00, 'ASD-MJVMXM6U-51Y', 0, 1, 0, 0, 0.00, 0, NULL, '2026-01-01 16:04:09', '2026-01-01 16:04:09', 0.00),
+(2, 1, NULL, 'asd', 'asd', '', '', 9.98, 0.00, 'ASD-MJVMZ1H8', 0, 1, 0, 0, 0.00, 0, NULL, '2026-01-01 16:05:12', '2026-01-01 16:05:12', 0.00),
+(3, 1, NULL, 'dfgdfg', 'dfgdfg', '', '', 32.98, 0.00, 'DFG-MJVQ0TUU', 0, 1, 0, 0, 0.00, 0, NULL, '2026-01-01 17:30:34', '2026-01-01 17:30:34', 0.00);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_images`
+-- بنية الجدول `product_images`
 --
 
 CREATE TABLE `product_images` (
@@ -633,10 +649,18 @@ CREATE TABLE `product_images` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- إرجاع أو استيراد بيانات الجدول `product_images`
+--
+
+INSERT INTO `product_images` (`image_id`, `product_id`, `image_url`, `is_primary`, `display_order`, `created_at`) VALUES
+(1, 1, 'uploads/products/drone003g-1767283449722-d56234a5-060d-4f11-9794-053be5f8bf64.jpg', 1, 0, '2026-01-01 16:04:10'),
+(2, 3, 'uploads/products/599689491-1172694888390181-8879928571604836770-n-1767288634858-9b01aa31-7cf5-4733-b5fc-a0bad48b51cc.jpg', 1, 0, '2026-01-01 17:30:35');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_options`
+-- بنية الجدول `product_options`
 --
 
 CREATE TABLE `product_options` (
@@ -651,7 +675,7 @@ CREATE TABLE `product_options` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_option_types`
+-- بنية الجدول `product_option_types`
 --
 
 CREATE TABLE `product_option_types` (
@@ -666,7 +690,7 @@ CREATE TABLE `product_option_types` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_option_values`
+-- بنية الجدول `product_option_values`
 --
 
 CREATE TABLE `product_option_values` (
@@ -684,7 +708,7 @@ CREATE TABLE `product_option_values` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_reviews`
+-- بنية الجدول `product_reviews`
 --
 
 CREATE TABLE `product_reviews` (
@@ -701,7 +725,7 @@ CREATE TABLE `product_reviews` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `settings`
+-- بنية الجدول `settings`
 --
 
 CREATE TABLE `settings` (
@@ -719,7 +743,7 @@ CREATE TABLE `settings` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `subcategories`
+-- بنية الجدول `subcategories`
 --
 
 CREATE TABLE `subcategories` (
@@ -741,7 +765,7 @@ CREATE TABLE `subcategories` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `suppliers`
+-- بنية الجدول `suppliers`
 --
 
 CREATE TABLE `suppliers` (
@@ -762,7 +786,7 @@ CREATE TABLE `suppliers` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `supplier_bills`
+-- بنية الجدول `supplier_bills`
 --
 
 CREATE TABLE `supplier_bills` (
@@ -795,7 +819,7 @@ CREATE TABLE `supplier_bills` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `supplier_bill_items`
+-- بنية الجدول `supplier_bill_items`
 --
 
 CREATE TABLE `supplier_bill_items` (
@@ -812,7 +836,7 @@ CREATE TABLE `supplier_bill_items` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `traders`
+-- بنية الجدول `traders`
 --
 
 CREATE TABLE `traders` (
@@ -835,7 +859,7 @@ CREATE TABLE `traders` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `trader_bills`
+-- بنية الجدول `trader_bills`
 --
 
 CREATE TABLE `trader_bills` (
@@ -858,7 +882,7 @@ CREATE TABLE `trader_bills` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Triggers `trader_bills`
+-- القوادح `trader_bills`
 --
 DELIMITER $$
 CREATE TRIGGER `after_trader_bill_insert` AFTER INSERT ON `trader_bills` FOR EACH ROW BEGIN
@@ -870,7 +894,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `trader_bill_items`
+-- بنية الجدول `trader_bill_items`
 --
 
 CREATE TABLE `trader_bill_items` (
@@ -886,7 +910,7 @@ CREATE TABLE `trader_bill_items` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `trader_payments`
+-- بنية الجدول `trader_payments`
 --
 
 CREATE TABLE `trader_payments` (
@@ -903,7 +927,7 @@ CREATE TABLE `trader_payments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Triggers `trader_payments`
+-- القوادح `trader_payments`
 --
 DELIMITER $$
 CREATE TRIGGER `after_trader_payment_insert` AFTER INSERT ON `trader_payments` FOR EACH ROW BEGIN
@@ -919,7 +943,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `transactions`
+-- بنية الجدول `transactions`
 --
 
 CREATE TABLE `transactions` (
@@ -947,15 +971,15 @@ CREATE TABLE `transactions` (
 -- (See below for the actual view)
 --
 CREATE TABLE `v_trader_balance_summary` (
-`trader_id` int
-,`company_name` varchar(100)
+`company_name` varchar(100)
 ,`contact_person` varchar(100)
-,`phone` varchar(20)
 ,`credit_limit` decimal(12,2)
 ,`current_balance` decimal(12,2)
-,`total_bills` bigint
-,`unpaid_amount` decimal(34,2)
 ,`partial_due` decimal(34,2)
+,`phone` varchar(20)
+,`total_bills` bigint
+,`trader_id` int
+,`unpaid_amount` decimal(34,2)
 );
 
 -- --------------------------------------------------------
@@ -965,16 +989,16 @@ CREATE TABLE `v_trader_balance_summary` (
 -- (See below for the actual view)
 --
 CREATE TABLE `v_wholesaler_balance_summary` (
-`wholesaler_id` int
-,`company_name` varchar(100)
+`company_name` varchar(100)
 ,`contact_person` varchar(100)
-,`phone` varchar(20)
-,`discount_percentage` decimal(5,2)
 ,`credit_limit` decimal(12,2)
 ,`current_balance` decimal(12,2)
+,`discount_percentage` decimal(5,2)
+,`partial_due` decimal(34,2)
+,`phone` varchar(20)
 ,`total_orders` bigint
 ,`unpaid_amount` decimal(34,2)
-,`partial_due` decimal(34,2)
+,`wholesaler_id` int
 );
 
 -- --------------------------------------------------------
@@ -984,24 +1008,24 @@ CREATE TABLE `v_wholesaler_balance_summary` (
 -- (See below for the actual view)
 --
 CREATE TABLE `v_worker_monthly_summary` (
-`worker_id` int
-,`full_name` varchar(100)
-,`position` varchar(50)
-,`base_salary` decimal(10,2)
-,`month` int
-,`year` int
-,`days_worked` int
-,`calculated_amount` decimal(10,2)
+`base_salary` decimal(10,2)
 ,`bonus` decimal(10,2)
+,`calculated_amount` decimal(10,2)
+,`days_worked` int
 ,`deductions` decimal(10,2)
+,`full_name` varchar(100)
+,`month` int
 ,`net_salary` decimal(10,2)
 ,`payment_status` enum('pending','paid')
+,`position` varchar(50)
+,`worker_id` int
+,`year` int
 );
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `wholesalers`
+-- بنية الجدول `wholesalers`
 --
 
 CREATE TABLE `wholesalers` (
@@ -1024,7 +1048,7 @@ CREATE TABLE `wholesalers` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `wholesaler_orders`
+-- بنية الجدول `wholesaler_orders`
 --
 
 CREATE TABLE `wholesaler_orders` (
@@ -1047,7 +1071,7 @@ CREATE TABLE `wholesaler_orders` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Triggers `wholesaler_orders`
+-- القوادح `wholesaler_orders`
 --
 DELIMITER $$
 CREATE TRIGGER `after_wholesaler_order_insert` AFTER INSERT ON `wholesaler_orders` FOR EACH ROW BEGIN
@@ -1059,7 +1083,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `wholesaler_order_items`
+-- بنية الجدول `wholesaler_order_items`
 --
 
 CREATE TABLE `wholesaler_order_items` (
@@ -1076,7 +1100,7 @@ CREATE TABLE `wholesaler_order_items` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `wholesaler_payments`
+-- بنية الجدول `wholesaler_payments`
 --
 
 CREATE TABLE `wholesaler_payments` (
@@ -1093,7 +1117,7 @@ CREATE TABLE `wholesaler_payments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Triggers `wholesaler_payments`
+-- القوادح `wholesaler_payments`
 --
 DELIMITER $$
 CREATE TRIGGER `after_wholesaler_payment_insert` AFTER INSERT ON `wholesaler_payments` FOR EACH ROW BEGIN
@@ -1109,7 +1133,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `wishlist`
+-- بنية الجدول `wishlist`
 --
 
 CREATE TABLE `wishlist` (
@@ -1122,7 +1146,7 @@ CREATE TABLE `wishlist` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `workers`
+-- بنية الجدول `workers`
 --
 
 CREATE TABLE `workers` (
@@ -1147,7 +1171,7 @@ CREATE TABLE `workers` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `worker_attendance`
+-- بنية الجدول `worker_attendance`
 --
 
 CREATE TABLE `worker_attendance` (
@@ -1166,7 +1190,7 @@ CREATE TABLE `worker_attendance` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `worker_salaries`
+-- بنية الجدول `worker_salaries`
 --
 
 CREATE TABLE `worker_salaries` (
@@ -1194,7 +1218,7 @@ CREATE TABLE `worker_salaries` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `_backup_migration_color_mapping`
+-- بنية الجدول `_backup_migration_color_mapping`
 --
 
 CREATE TABLE `_backup_migration_color_mapping` (
@@ -1206,7 +1230,7 @@ CREATE TABLE `_backup_migration_color_mapping` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `_backup_migration_size_mapping`
+-- بنية الجدول `_backup_migration_size_mapping`
 --
 
 CREATE TABLE `_backup_migration_size_mapping` (
@@ -1218,7 +1242,7 @@ CREATE TABLE `_backup_migration_size_mapping` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `_backup_migration_variant_mapping`
+-- بنية الجدول `_backup_migration_variant_mapping`
 --
 
 CREATE TABLE `_backup_migration_variant_mapping` (
@@ -1232,7 +1256,7 @@ CREATE TABLE `_backup_migration_variant_mapping` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `_backup_product_colors`
+-- بنية الجدول `_backup_product_colors`
 --
 
 CREATE TABLE `_backup_product_colors` (
@@ -1247,7 +1271,7 @@ CREATE TABLE `_backup_product_colors` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `_backup_product_sizes`
+-- بنية الجدول `_backup_product_sizes`
 --
 
 CREATE TABLE `_backup_product_sizes` (
@@ -1261,7 +1285,7 @@ CREATE TABLE `_backup_product_sizes` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `_backup_product_variants`
+-- بنية الجدول `_backup_product_variants`
 --
 
 CREATE TABLE `_backup_product_variants` (
@@ -1280,14 +1304,14 @@ CREATE TABLE `_backup_product_variants` (
 --
 
 --
--- Indexes for table `admins`
+-- فهارس للجدول `admins`
 --
 ALTER TABLE `admins`
   ADD PRIMARY KEY (`admin_id`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- Indexes for table `admin_activity_log`
+-- فهارس للجدول `admin_activity_log`
 --
 ALTER TABLE `admin_activity_log`
   ADD PRIMARY KEY (`log_id`),
@@ -1297,7 +1321,7 @@ ALTER TABLE `admin_activity_log`
   ADD KEY `idx_created_at` (`created_at`);
 
 --
--- Indexes for table `admin_traders`
+-- فهارس للجدول `admin_traders`
 --
 ALTER TABLE `admin_traders`
   ADD PRIMARY KEY (`trader_id`),
@@ -1305,7 +1329,7 @@ ALTER TABLE `admin_traders`
   ADD KEY `idx_status` (`status`);
 
 --
--- Indexes for table `admin_users`
+-- فهارس للجدول `admin_users`
 --
 ALTER TABLE `admin_users`
   ADD PRIMARY KEY (`admin_id`),
@@ -1313,14 +1337,14 @@ ALTER TABLE `admin_users`
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- Indexes for table `banners`
+-- فهارس للجدول `banners`
 --
 ALTER TABLE `banners`
   ADD PRIMARY KEY (`banner_id`),
   ADD KEY `idx_active` (`is_active`,`display_order`);
 
 --
--- Indexes for table `bill_images`
+-- فهارس للجدول `bill_images`
 --
 ALTER TABLE `bill_images`
   ADD PRIMARY KEY (`bill_image_id`),
@@ -1331,14 +1355,14 @@ ALTER TABLE `bill_images`
   ADD KEY `idx_created_at` (`created_at`);
 
 --
--- Indexes for table `bill_sequences`
+-- فهارس للجدول `bill_sequences`
 --
 ALTER TABLE `bill_sequences`
   ADD PRIMARY KEY (`sequence_id`),
   ADD UNIQUE KEY `unique_sequence_year` (`sequence_type`,`current_year`);
 
 --
--- Indexes for table `cart_items`
+-- فهارس للجدول `cart_items`
 --
 ALTER TABLE `cart_items`
   ADD PRIMARY KEY (`cart_item_id`),
@@ -1347,13 +1371,13 @@ ALTER TABLE `cart_items`
   ADD KEY `idx_cart_product_options` (`product_id`,`selected_options`(255));
 
 --
--- Indexes for table `categories`
+-- فهارس للجدول `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`category_id`);
 
 --
--- Indexes for table `contact_messages`
+-- فهارس للجدول `contact_messages`
 --
 ALTER TABLE `contact_messages`
   ADD PRIMARY KEY (`message_id`),
@@ -1361,7 +1385,7 @@ ALTER TABLE `contact_messages`
   ADD KEY `replied_by` (`replied_by`);
 
 --
--- Indexes for table `customer_bills`
+-- فهارس للجدول `customer_bills`
 --
 ALTER TABLE `customer_bills`
   ADD PRIMARY KEY (`bill_id`),
@@ -1371,7 +1395,7 @@ ALTER TABLE `customer_bills`
   ADD KEY `created_by` (`created_by`);
 
 --
--- Indexes for table `customer_bill_items`
+-- فهارس للجدول `customer_bill_items`
 --
 ALTER TABLE `customer_bill_items`
   ADD PRIMARY KEY (`item_id`),
@@ -1380,7 +1404,7 @@ ALTER TABLE `customer_bill_items`
   ADD KEY `variant_id` (`variant_id`);
 
 --
--- Indexes for table `customer_debts`
+-- فهارس للجدول `customer_debts`
 --
 ALTER TABLE `customer_debts`
   ADD PRIMARY KEY (`debt_id`),
@@ -1390,7 +1414,7 @@ ALTER TABLE `customer_debts`
   ADD KEY `created_by` (`created_by`);
 
 --
--- Indexes for table `debt_payments`
+-- فهارس للجدول `debt_payments`
 --
 ALTER TABLE `debt_payments`
   ADD PRIMARY KEY (`payment_id`),
@@ -1399,7 +1423,7 @@ ALTER TABLE `debt_payments`
   ADD KEY `recorded_by` (`recorded_by`);
 
 --
--- Indexes for table `guest_carts`
+-- فهارس للجدول `guest_carts`
 --
 ALTER TABLE `guest_carts`
   ADD PRIMARY KEY (`cart_id`),
@@ -1407,7 +1431,7 @@ ALTER TABLE `guest_carts`
   ADD KEY `idx_product` (`product_id`);
 
 --
--- Indexes for table `invoices`
+-- فهارس للجدول `invoices`
 --
 ALTER TABLE `invoices`
   ADD PRIMARY KEY (`invoice_id`),
@@ -1418,7 +1442,7 @@ ALTER TABLE `invoices`
   ADD KEY `idx_due_date` (`due_date`);
 
 --
--- Indexes for table `invoice_items`
+-- فهارس للجدول `invoice_items`
 --
 ALTER TABLE `invoice_items`
   ADD PRIMARY KEY (`item_id`),
@@ -1426,7 +1450,7 @@ ALTER TABLE `invoice_items`
   ADD KEY `idx_product_id` (`product_id`);
 
 --
--- Indexes for table `migrations`
+-- فهارس للجدول `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`),
@@ -1434,7 +1458,7 @@ ALTER TABLE `migrations`
   ADD KEY `idx_name` (`name`);
 
 --
--- Indexes for table `notifications`
+-- فهارس للجدول `notifications`
 --
 ALTER TABLE `notifications`
   ADD PRIMARY KEY (`notification_id`),
@@ -1443,7 +1467,7 @@ ALTER TABLE `notifications`
   ADD KEY `idx_created_at` (`created_at`);
 
 --
--- Indexes for table `orders`
+-- فهارس للجدول `orders`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`order_id`),
@@ -1456,7 +1480,7 @@ ALTER TABLE `orders`
   ADD KEY `idx_delivery_method` (`delivery_method`);
 
 --
--- Indexes for table `order_items`
+-- فهارس للجدول `order_items`
 --
 ALTER TABLE `order_items`
   ADD PRIMARY KEY (`order_item_id`),
@@ -1464,7 +1488,7 @@ ALTER TABLE `order_items`
   ADD KEY `idx_order_product_options` (`product_id`,`selected_options`(255));
 
 --
--- Indexes for table `order_status_history`
+-- فهارس للجدول `order_status_history`
 --
 ALTER TABLE `order_status_history`
   ADD PRIMARY KEY (`history_id`),
@@ -1472,7 +1496,7 @@ ALTER TABLE `order_status_history`
   ADD KEY `idx_created_at` (`created_at`);
 
 --
--- Indexes for table `payments`
+-- فهارس للجدول `payments`
 --
 ALTER TABLE `payments`
   ADD PRIMARY KEY (`payment_id`),
@@ -1483,7 +1507,7 @@ ALTER TABLE `payments`
   ADD KEY `idx_status` (`status`);
 
 --
--- Indexes for table `phone_otps`
+-- فهارس للجدول `phone_otps`
 --
 ALTER TABLE `phone_otps`
   ADD PRIMARY KEY (`id`),
@@ -1491,7 +1515,7 @@ ALTER TABLE `phone_otps`
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indexes for table `products`
+-- فهارس للجدول `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`product_id`),
@@ -1500,14 +1524,14 @@ ALTER TABLE `products`
   ADD KEY `subcategory_id` (`subcategory_id`);
 
 --
--- Indexes for table `product_images`
+-- فهارس للجدول `product_images`
 --
 ALTER TABLE `product_images`
   ADD PRIMARY KEY (`image_id`),
   ADD KEY `product_id` (`product_id`);
 
 --
--- Indexes for table `product_options`
+-- فهارس للجدول `product_options`
 --
 ALTER TABLE `product_options`
   ADD PRIMARY KEY (`product_option_id`),
@@ -1516,20 +1540,20 @@ ALTER TABLE `product_options`
   ADD KEY `idx_option_type` (`option_type_id`);
 
 --
--- Indexes for table `product_option_types`
+-- فهارس للجدول `product_option_types`
 --
 ALTER TABLE `product_option_types`
   ADD PRIMARY KEY (`option_type_id`);
 
 --
--- Indexes for table `product_option_values`
+-- فهارس للجدول `product_option_values`
 --
 ALTER TABLE `product_option_values`
   ADD PRIMARY KEY (`option_value_id`),
   ADD KEY `idx_option_type` (`option_type_id`);
 
 --
--- Indexes for table `product_reviews`
+-- فهارس للجدول `product_reviews`
 --
 ALTER TABLE `product_reviews`
   ADD PRIMARY KEY (`review_id`),
@@ -1537,7 +1561,7 @@ ALTER TABLE `product_reviews`
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indexes for table `settings`
+-- فهارس للجدول `settings`
 --
 ALTER TABLE `settings`
   ADD PRIMARY KEY (`setting_id`),
@@ -1545,7 +1569,7 @@ ALTER TABLE `settings`
   ADD KEY `idx_setting_group` (`setting_group`);
 
 --
--- Indexes for table `subcategories`
+-- فهارس للجدول `subcategories`
 --
 ALTER TABLE `subcategories`
   ADD PRIMARY KEY (`subcategory_id`),
@@ -1553,14 +1577,14 @@ ALTER TABLE `subcategories`
   ADD KEY `idx_parent_id` (`parent_id`);
 
 --
--- Indexes for table `suppliers`
+-- فهارس للجدول `suppliers`
 --
 ALTER TABLE `suppliers`
   ADD PRIMARY KEY (`supplier_id`),
   ADD KEY `idx_is_active` (`is_active`);
 
 --
--- Indexes for table `supplier_bills`
+-- فهارس للجدول `supplier_bills`
 --
 ALTER TABLE `supplier_bills`
   ADD PRIMARY KEY (`bill_id`),
@@ -1570,20 +1594,20 @@ ALTER TABLE `supplier_bills`
   ADD KEY `idx_due_date` (`due_date`);
 
 --
--- Indexes for table `supplier_bill_items`
+-- فهارس للجدول `supplier_bill_items`
 --
 ALTER TABLE `supplier_bill_items`
   ADD PRIMARY KEY (`item_id`),
   ADD KEY `idx_bill_id` (`bill_id`);
 
 --
--- Indexes for table `traders`
+-- فهارس للجدول `traders`
 --
 ALTER TABLE `traders`
   ADD PRIMARY KEY (`trader_id`);
 
 --
--- Indexes for table `trader_bills`
+-- فهارس للجدول `trader_bills`
 --
 ALTER TABLE `trader_bills`
   ADD PRIMARY KEY (`bill_id`),
@@ -1591,7 +1615,7 @@ ALTER TABLE `trader_bills`
   ADD KEY `created_by` (`created_by`);
 
 --
--- Indexes for table `trader_bill_items`
+-- فهارس للجدول `trader_bill_items`
 --
 ALTER TABLE `trader_bill_items`
   ADD PRIMARY KEY (`item_id`),
@@ -1599,7 +1623,7 @@ ALTER TABLE `trader_bill_items`
   ADD KEY `product_id` (`product_id`);
 
 --
--- Indexes for table `trader_payments`
+-- فهارس للجدول `trader_payments`
 --
 ALTER TABLE `trader_payments`
   ADD PRIMARY KEY (`payment_id`),
@@ -1608,7 +1632,7 @@ ALTER TABLE `trader_payments`
   ADD KEY `created_by` (`created_by`);
 
 --
--- Indexes for table `transactions`
+-- فهارس للجدول `transactions`
 --
 ALTER TABLE `transactions`
   ADD PRIMARY KEY (`transaction_id`),
@@ -1619,13 +1643,13 @@ ALTER TABLE `transactions`
   ADD KEY `idx_created_at` (`created_at`);
 
 --
--- Indexes for table `wholesalers`
+-- فهارس للجدول `wholesalers`
 --
 ALTER TABLE `wholesalers`
   ADD PRIMARY KEY (`wholesaler_id`);
 
 --
--- Indexes for table `wholesaler_orders`
+-- فهارس للجدول `wholesaler_orders`
 --
 ALTER TABLE `wholesaler_orders`
   ADD PRIMARY KEY (`order_id`),
@@ -1634,7 +1658,7 @@ ALTER TABLE `wholesaler_orders`
   ADD KEY `created_by` (`created_by`);
 
 --
--- Indexes for table `wholesaler_order_items`
+-- فهارس للجدول `wholesaler_order_items`
 --
 ALTER TABLE `wholesaler_order_items`
   ADD PRIMARY KEY (`item_id`),
@@ -1643,7 +1667,7 @@ ALTER TABLE `wholesaler_order_items`
   ADD KEY `variant_id` (`variant_id`);
 
 --
--- Indexes for table `wholesaler_payments`
+-- فهارس للجدول `wholesaler_payments`
 --
 ALTER TABLE `wholesaler_payments`
   ADD PRIMARY KEY (`payment_id`),
@@ -1652,7 +1676,7 @@ ALTER TABLE `wholesaler_payments`
   ADD KEY `created_by` (`created_by`);
 
 --
--- Indexes for table `wishlist`
+-- فهارس للجدول `wishlist`
 --
 ALTER TABLE `wishlist`
   ADD PRIMARY KEY (`wishlist_id`),
@@ -1660,13 +1684,13 @@ ALTER TABLE `wishlist`
   ADD KEY `product_id` (`product_id`);
 
 --
--- Indexes for table `workers`
+-- فهارس للجدول `workers`
 --
 ALTER TABLE `workers`
   ADD PRIMARY KEY (`worker_id`);
 
 --
--- Indexes for table `worker_attendance`
+-- فهارس للجدول `worker_attendance`
 --
 ALTER TABLE `worker_attendance`
   ADD PRIMARY KEY (`attendance_id`),
@@ -1674,7 +1698,7 @@ ALTER TABLE `worker_attendance`
   ADD KEY `recorded_by` (`recorded_by`);
 
 --
--- Indexes for table `worker_salaries`
+-- فهارس للجدول `worker_salaries`
 --
 ALTER TABLE `worker_salaries`
   ADD PRIMARY KEY (`salary_id`),
@@ -1737,7 +1761,7 @@ ALTER TABLE `cart_items`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `category_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `category_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `contact_messages`
@@ -1833,13 +1857,13 @@ ALTER TABLE `phone_otps`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `product_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `product_images`
 --
 ALTER TABLE `product_images`
-  MODIFY `image_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `image_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `product_options`
@@ -2001,83 +2025,83 @@ DROP TABLE IF EXISTS `v_worker_monthly_summary`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`cpses_viju0qxcg8`@`localhost` SQL SECURITY DEFINER VIEW `v_worker_monthly_summary`  AS SELECT `w`.`worker_id` AS `worker_id`, `w`.`full_name` AS `full_name`, `w`.`position` AS `position`, `w`.`base_salary` AS `base_salary`, `ws`.`month` AS `month`, `ws`.`year` AS `year`, `ws`.`days_worked` AS `days_worked`, `ws`.`calculated_amount` AS `calculated_amount`, `ws`.`bonus` AS `bonus`, `ws`.`deductions` AS `deductions`, `ws`.`net_salary` AS `net_salary`, `ws`.`payment_status` AS `payment_status` FROM (`workers` `w` left join `worker_salaries` `ws` on((`w`.`worker_id` = `ws`.`worker_id`))) WHERE (`w`.`status` = 'active') ;
 
 --
--- Constraints for dumped tables
+-- القيود المفروضة على الجداول الملقاة
 --
 
 --
--- Constraints for table `bill_images`
+-- قيود الجداول `bill_images`
 --
 ALTER TABLE `bill_images`
   ADD CONSTRAINT `bill_images_ibfk_1` FOREIGN KEY (`uploaded_by`) REFERENCES `admin_users` (`admin_id`) ON DELETE SET NULL,
   ADD CONSTRAINT `bill_images_ibfk_2` FOREIGN KEY (`processed_by`) REFERENCES `admin_users` (`admin_id`) ON DELETE SET NULL;
 
 --
--- Constraints for table `cart_items`
+-- قيود الجداول `cart_items`
 --
 ALTER TABLE `cart_items`
   ADD CONSTRAINT `cart_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `contact_messages`
+-- قيود الجداول `contact_messages`
 --
 ALTER TABLE `contact_messages`
   ADD CONSTRAINT `contact_messages_ibfk_2` FOREIGN KEY (`replied_by`) REFERENCES `admin_users` (`admin_id`) ON DELETE SET NULL;
 
 --
--- Constraints for table `customer_bills`
+-- قيود الجداول `customer_bills`
 --
 ALTER TABLE `customer_bills`
   ADD CONSTRAINT `customer_bills_ibfk_2` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`),
   ADD CONSTRAINT `customer_bills_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `admins` (`admin_id`);
 
 --
--- Constraints for table `customer_bill_items`
+-- قيود الجداول `customer_bill_items`
 --
 ALTER TABLE `customer_bill_items`
   ADD CONSTRAINT `customer_bill_items_ibfk_1` FOREIGN KEY (`bill_id`) REFERENCES `customer_bills` (`bill_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `customer_bill_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
 
 --
--- Constraints for table `customer_debts`
+-- قيود الجداول `customer_debts`
 --
 ALTER TABLE `customer_debts`
   ADD CONSTRAINT `customer_debts_ibfk_2` FOREIGN KEY (`bill_id`) REFERENCES `customer_bills` (`bill_id`),
   ADD CONSTRAINT `customer_debts_ibfk_3` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`);
 
 --
--- Constraints for table `debt_payments`
+-- قيود الجداول `debt_payments`
 --
 ALTER TABLE `debt_payments`
   ADD CONSTRAINT `debt_payments_ibfk_1` FOREIGN KEY (`debt_id`) REFERENCES `customer_debts` (`debt_id`),
   ADD CONSTRAINT `debt_payments_ibfk_3` FOREIGN KEY (`recorded_by`) REFERENCES `admins` (`admin_id`);
 
 --
--- Constraints for table `invoices`
+-- قيود الجداول `invoices`
 --
 ALTER TABLE `invoices`
   ADD CONSTRAINT `fk_invoice_order` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`) ON DELETE SET NULL;
 
 --
--- Constraints for table `invoice_items`
+-- قيود الجداول `invoice_items`
 --
 ALTER TABLE `invoice_items`
   ADD CONSTRAINT `fk_invoice_item_invoice` FOREIGN KEY (`invoice_id`) REFERENCES `invoices` (`invoice_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `fk_invoice_item_product` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE SET NULL;
 
 --
--- Constraints for table `order_items`
+-- قيود الجداول `order_items`
 --
 ALTER TABLE `order_items`
   ADD CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `order_status_history`
+-- قيود الجداول `order_status_history`
 --
 ALTER TABLE `order_status_history`
   ADD CONSTRAINT `fk_order_history_order` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `payments`
+-- قيود الجداول `payments`
 --
 ALTER TABLE `payments`
   ADD CONSTRAINT `fk_payment_bill` FOREIGN KEY (`bill_id`) REFERENCES `supplier_bills` (`bill_id`) ON DELETE SET NULL,
@@ -2085,72 +2109,72 @@ ALTER TABLE `payments`
   ADD CONSTRAINT `fk_payment_order` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`) ON DELETE SET NULL;
 
 --
--- Constraints for table `products`
+-- قيود الجداول `products`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `products_ibfk_2` FOREIGN KEY (`subcategory_id`) REFERENCES `subcategories` (`subcategory_id`) ON DELETE SET NULL;
 
 --
--- Constraints for table `product_images`
+-- قيود الجداول `product_images`
 --
 ALTER TABLE `product_images`
   ADD CONSTRAINT `product_images_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `product_options`
+-- قيود الجداول `product_options`
 --
 ALTER TABLE `product_options`
   ADD CONSTRAINT `fk_product_option_product` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `fk_product_option_type` FOREIGN KEY (`option_type_id`) REFERENCES `product_option_types` (`option_type_id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `product_option_values`
+-- قيود الجداول `product_option_values`
 --
 ALTER TABLE `product_option_values`
   ADD CONSTRAINT `fk_option_value_type` FOREIGN KEY (`option_type_id`) REFERENCES `product_option_types` (`option_type_id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `product_reviews`
+-- قيود الجداول `product_reviews`
 --
 ALTER TABLE `product_reviews`
   ADD CONSTRAINT `product_reviews_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `subcategories`
+-- قيود الجداول `subcategories`
 --
 ALTER TABLE `subcategories`
   ADD CONSTRAINT `fk_subcategory_parent` FOREIGN KEY (`parent_id`) REFERENCES `subcategories` (`subcategory_id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `subcategories_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `supplier_bills`
+-- قيود الجداول `supplier_bills`
 --
 ALTER TABLE `supplier_bills`
   ADD CONSTRAINT `fk_supplier_bill_supplier` FOREIGN KEY (`supplier_id`) REFERENCES `suppliers` (`supplier_id`) ON DELETE SET NULL;
 
 --
--- Constraints for table `supplier_bill_items`
+-- قيود الجداول `supplier_bill_items`
 --
 ALTER TABLE `supplier_bill_items`
   ADD CONSTRAINT `fk_supplier_bill_item_bill` FOREIGN KEY (`bill_id`) REFERENCES `supplier_bills` (`bill_id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `trader_bills`
+-- قيود الجداول `trader_bills`
 --
 ALTER TABLE `trader_bills`
   ADD CONSTRAINT `trader_bills_ibfk_1` FOREIGN KEY (`trader_id`) REFERENCES `traders` (`trader_id`),
   ADD CONSTRAINT `trader_bills_ibfk_2` FOREIGN KEY (`created_by`) REFERENCES `admins` (`admin_id`);
 
 --
--- Constraints for table `trader_bill_items`
+-- قيود الجداول `trader_bill_items`
 --
 ALTER TABLE `trader_bill_items`
   ADD CONSTRAINT `trader_bill_items_ibfk_1` FOREIGN KEY (`bill_id`) REFERENCES `trader_bills` (`bill_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `trader_bill_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
 
 --
--- Constraints for table `trader_payments`
+-- قيود الجداول `trader_payments`
 --
 ALTER TABLE `trader_payments`
   ADD CONSTRAINT `trader_payments_ibfk_1` FOREIGN KEY (`trader_id`) REFERENCES `traders` (`trader_id`),
@@ -2158,21 +2182,21 @@ ALTER TABLE `trader_payments`
   ADD CONSTRAINT `trader_payments_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `admins` (`admin_id`);
 
 --
--- Constraints for table `wholesaler_orders`
+-- قيود الجداول `wholesaler_orders`
 --
 ALTER TABLE `wholesaler_orders`
   ADD CONSTRAINT `wholesaler_orders_ibfk_1` FOREIGN KEY (`wholesaler_id`) REFERENCES `wholesalers` (`wholesaler_id`),
   ADD CONSTRAINT `wholesaler_orders_ibfk_2` FOREIGN KEY (`created_by`) REFERENCES `admins` (`admin_id`);
 
 --
--- Constraints for table `wholesaler_order_items`
+-- قيود الجداول `wholesaler_order_items`
 --
 ALTER TABLE `wholesaler_order_items`
   ADD CONSTRAINT `wholesaler_order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `wholesaler_orders` (`order_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `wholesaler_order_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
 
 --
--- Constraints for table `wholesaler_payments`
+-- قيود الجداول `wholesaler_payments`
 --
 ALTER TABLE `wholesaler_payments`
   ADD CONSTRAINT `wholesaler_payments_ibfk_1` FOREIGN KEY (`wholesaler_id`) REFERENCES `wholesalers` (`wholesaler_id`),
@@ -2180,20 +2204,20 @@ ALTER TABLE `wholesaler_payments`
   ADD CONSTRAINT `wholesaler_payments_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `admins` (`admin_id`);
 
 --
--- Constraints for table `wishlist`
+-- قيود الجداول `wishlist`
 --
 ALTER TABLE `wishlist`
   ADD CONSTRAINT `wishlist_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `worker_attendance`
+-- قيود الجداول `worker_attendance`
 --
 ALTER TABLE `worker_attendance`
   ADD CONSTRAINT `worker_attendance_ibfk_1` FOREIGN KEY (`worker_id`) REFERENCES `workers` (`worker_id`),
   ADD CONSTRAINT `worker_attendance_ibfk_2` FOREIGN KEY (`recorded_by`) REFERENCES `admins` (`admin_id`);
 
 --
--- Constraints for table `worker_salaries`
+-- قيود الجداول `worker_salaries`
 --
 ALTER TABLE `worker_salaries`
   ADD CONSTRAINT `worker_salaries_ibfk_1` FOREIGN KEY (`worker_id`) REFERENCES `workers` (`worker_id`),

@@ -75,10 +75,13 @@ const testConnection = async () => {
  * @param {string} sql - SQL query
  * @param {Array} params - Query parameters
  * @returns {Promise<Array>} Query results
+ *
+ * Note: Using pool.query() instead of pool.execute() to avoid mysql2
+ * prepared statement issues with LIMIT/OFFSET parameters
  */
 const query = async (sql, params = []) => {
   try {
-    const [results] = await pool.execute(sql, params);
+    const [results] = await pool.query(sql, params);
     return results;
   } catch (error) {
     console.error('Database query error:', error.message);
@@ -96,7 +99,7 @@ const query = async (sql, params = []) => {
  */
 const queryWithFields = async (sql, params = []) => {
   try {
-    return await pool.execute(sql, params);
+    return await pool.query(sql, params);
   } catch (error) {
     console.error('Database query error:', error.message);
     throw error;

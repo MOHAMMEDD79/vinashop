@@ -4,7 +4,8 @@
  */
 
 const CustomerDebt = require('../models/customerDebt.model');
-const User = require('../models/user.model');
+// Note: User model removed - users table does not exist in this database
+// Customer info is stored directly in customer_name and customer_phone fields
 
 class CustomerDebtService {
   /**
@@ -37,30 +38,25 @@ class CustomerDebtService {
   }
 
   /**
-   * Get debts by user ID
+   * Get debts by user ID (legacy support)
    */
   static async getByUserId(userId, options = {}) {
-    const user = await User.getById(userId);
-    if (!user) {
-      throw new Error('User not found');
-    }
+    // Note: users table doesn't exist, but we still support filtering by user_id
+    // for any debts that may have been created with a user_id value
     return await CustomerDebt.getByUserId(userId, options);
   }
 
   /**
-   * Get user debt summary
+   * Get user debt summary (legacy support)
    */
   static async getUserDebtSummary(userId) {
-    const user = await User.getById(userId);
-    if (!user) {
-      throw new Error('User not found');
-    }
+    // Note: users table doesn't exist - summary is based on debts data only
     const summary = await CustomerDebt.getUserDebtSummary(userId);
     if (!summary) {
       return {
         user_id: userId,
-        full_name: user.full_name,
-        email: user.email,
+        full_name: null,
+        email: null,
         total_debts: 0,
         total_debt_amount: 0,
         total_paid: 0,
@@ -79,11 +75,8 @@ class CustomerDebtService {
    * Create new customer debt
    */
   static async create(data, createdBy) {
-    // Validate user
-    const user = await User.getById(data.user_id);
-    if (!user) {
-      throw new Error('User not found');
-    }
+    // Note: user_id validation removed - users table doesn't exist
+    // Customer info is stored via customer_name and customer_phone
 
     if (!data.total_debt || data.total_debt <= 0) {
       throw new Error('Valid debt amount is required');

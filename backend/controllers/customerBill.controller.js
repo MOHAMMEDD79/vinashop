@@ -186,8 +186,10 @@ class CustomerBillController {
   static async create(req, res) {
     try {
       const data = {
-        user_id: req.body.user_id || req.body.userId,
+        user_id: req.body.user_id || req.body.userId || null,
         order_id: req.body.order_id || req.body.orderId,
+        customer_name: req.body.customer_name || req.body.customerName,
+        customer_phone: req.body.customer_phone || req.body.customerPhone,
         bill_date: req.body.bill_date || req.body.billDate,
         subtotal: req.body.subtotal,
         tax_amount: req.body.tax_amount || req.body.taxAmount,
@@ -221,6 +223,8 @@ class CustomerBillController {
       const data = {
         user_id: req.body.user_id || req.body.userId,
         order_id: req.body.order_id || req.body.orderId,
+        customer_name: req.body.customer_name || req.body.customerName,
+        customer_phone: req.body.customer_phone || req.body.customerPhone,
         bill_date: req.body.bill_date || req.body.billDate,
         subtotal: req.body.subtotal,
         tax_amount: req.body.tax_amount || req.body.taxAmount,

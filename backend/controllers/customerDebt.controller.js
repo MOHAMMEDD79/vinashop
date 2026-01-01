@@ -187,9 +187,11 @@ class CustomerDebtController {
   static async create(req, res) {
     try {
       const data = {
-        user_id: req.body.user_id || req.body.userId,
+        user_id: req.body.user_id || req.body.userId || null,
         bill_id: req.body.bill_id || req.body.billId,
         order_id: req.body.order_id || req.body.orderId,
+        customer_name: req.body.customer_name || req.body.customerName,
+        customer_phone: req.body.customer_phone || req.body.customerPhone,
         total_debt: req.body.total_debt || req.body.totalDebt,
         due_date: req.body.due_date || req.body.dueDate,
         notes: req.body.notes,
@@ -199,7 +201,8 @@ class CustomerDebtController {
         return errorResponse(res, 'Valid debt amount is required', 400);
       }
 
-      const debt = await customerDebtService.create(data, req.admin.adminId);
+      const adminId = req.admin?.adminId || req.admin?.admin_id;
+      const debt = await customerDebtService.create(data, adminId);
       return successResponse(res, formatDebt(debt), 'Debt created successfully', 201);
     } catch (error) {
       return errorResponse(res, error.message, 400);
@@ -212,6 +215,8 @@ class CustomerDebtController {
   static async update(req, res) {
     try {
       const data = {
+        customer_name: req.body.customer_name || req.body.customerName,
+        customer_phone: req.body.customer_phone || req.body.customerPhone,
         total_debt: req.body.total_debt || req.body.totalDebt,
         due_date: req.body.due_date || req.body.dueDate,
         status: req.body.status,
