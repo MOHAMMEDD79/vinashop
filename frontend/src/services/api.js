@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Get API URL from environment variable, with fallback
-const API_BASE = import.meta.env.VITE_API_URL || 'https://api.vinashop.ps';
+const API_BASE = import.meta.env.VITE_API_URL || 'https://api-v2.vinashop.ps';
 const API_URL = `${API_BASE}/api/admin/v1`;
 
 const api = axios.create({

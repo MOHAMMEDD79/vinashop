@@ -3,13 +3,13 @@
  * Handles converting relative paths from database to full URLs
  *
  * Uses environment variables for easy configuration:
- * - Production: VITE_UPLOADS_URL=https://api.vinashop.ps
+ * - Production: VITE_UPLOADS_URL=https://api-v2.vinashop.ps
  * - Development: VITE_UPLOADS_URL=http://localhost:5000
  */
 
 // Get uploads base URL from environment variable
 // Falls back to VinaShop backend (port 5000) where images are stored
-const UPLOADS_BASE_URL = import.meta.env.VITE_UPLOADS_URL || 'https://api.vinashop.ps';
+const UPLOADS_BASE_URL = import.meta.env.VITE_UPLOADS_URL || 'https://api-v2.vinashop.ps';
 
 /**
  * Get the full URL for an image/media path

@@ -200,7 +200,7 @@ const Banners = () => {
   const getMediaUrl = (banner) => {
     // Banner media is stored as file path in uploads folder
     if (banner.media_path) {
-      const API_BASE = import.meta.env.VITE_API_URL || 'https://api.vinashop.ps';
+      const API_BASE = import.meta.env.VITE_API_URL || 'https://api-v2.vinashop.ps';
       return `${API_BASE}/${banner.media_path}`;
     }
     return null;

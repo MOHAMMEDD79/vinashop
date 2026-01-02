@@ -1,7 +1,7 @@
 login:1 [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) <input class=​"form-control" placeholder=​"Password" required type=​"password" value>​
 index-Db6VKnGS.js:192 null
-login:1 Access to XMLHttpRequest at 'https://api.vinashop.ps/api/admin/v1/auth/login' from origin 'https://www.dashboard.vinashop.ps' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
-index-Db6VKnGS.js:189  POST https://api.vinashop.ps/api/admin/v1/auth/login net::ERR_FAILED 500 (Internal Server Error)
+login:1 Access to XMLHttpRequest at 'https://api-v2.vinashop.ps/api/admin/v1/auth/login' from origin 'https://www.dashboard.vinashop.ps' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+index-Db6VKnGS.js:189  POST https://api-v2.vinashop.ps/api/admin/v1/auth/login net::ERR_FAILED 500 (Internal Server Error)
 (anonymous) @ index-Db6VKnGS.js:189
 xhr @ index-Db6VKnGS.js:189
 LS @ index-Db6VKnGS.js:191
@@ -20,8 +20,8 @@ Um @ index-Db6VKnGS.js:8
 eg @ index-Db6VKnGS.js:9
 c4 @ index-Db6VKnGS.js:9
 index-Db6VKnGS.js:192 null
-login:1 Access to XMLHttpRequest at 'https://api.vinashop.ps/api/admin/v1/auth/login' from origin 'https://www.dashboard.vinashop.ps' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
-index-Db6VKnGS.js:189  POST https://api.vinashop.ps/api/admin/v1/auth/login net::ERR_FAILED 500 (Internal Server Error)
+login:1 Access to XMLHttpRequest at 'https://api-v2.vinashop.ps/api/admin/v1/auth/login' from origin 'https://www.dashboard.vinashop.ps' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+index-Db6VKnGS.js:189  POST https://api-v2.vinashop.ps/api/admin/v1/auth/login net::ERR_FAILED 500 (Internal Server Error)
 (anonymous) @ index-Db6VKnGS.js:189
 xhr @ index-Db6VKnGS.js:189
 LS @ index-Db6VKnGS.js:191

@@ -19,7 +19,7 @@ const allowedOrigins = [
   'https://admin.vinashop.ps',
   // API domain
   'http://api.vinashop.ps',
-  'https://api.vinashop.ps',
+  'https://api-v2.vinashop.ps',
   // Environment variables (for flexibility)
   process.env.FRONTEND_URL,
   process.env.ADMIN_PANEL_URL,
