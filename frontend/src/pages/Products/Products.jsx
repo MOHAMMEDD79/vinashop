@@ -225,17 +225,38 @@ const Products = () => {
       if (editingProduct) {
         await api.put(`/test/products/${editingProduct.product_id}`, submitData);
         productId = editingProduct.product_id;
-        toast.success(t('app.success'));
       } else {
         const res = await api.post('/test/products', submitData);
         productId = res.data.data.product_id;
-        toast.success(t('app.success'));
+      }
+
+      // Save product options (selectedOptions contains option_value_ids)
+      if (selectedOptions.length > 0) {
+        try {
+          await api.put(`/product-options/products/${productId}`, {
+            option_value_ids: selectedOptions
+          });
+        } catch (optionError) {
+          console.error('Failed to save product options:', optionError);
+          toast.error(t('productOptions.saveFailed') || 'Failed to save product options');
+        }
+      } else {
+        // Clear options if none selected
+        try {
+          await api.put(`/product-options/products/${productId}`, {
+            option_value_ids: []
+          });
+        } catch (optionError) {
+          console.error('Failed to clear product options:', optionError);
+        }
       }
 
       // Upload selected image files
       if (selectedFiles.length > 0) {
         await uploadProductImages(productId);
       }
+
+      toast.success(t('app.success'));
 
       setShowModal(false);
       resetForm();

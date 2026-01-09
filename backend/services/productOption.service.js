@@ -72,6 +72,10 @@ class ProductOptionService {
     return await ProductOption.setProductOptions(productId, options);
   }
 
+  async setProductOptionsByValueIds(productId, valueIds) {
+    return await ProductOption.setProductOptionsByValueIds(productId, valueIds);
+  }
+
   async addProductOption(productId, optionTypeId, isRequired) {
     return await ProductOption.addProductOption(productId, optionTypeId, isRequired);
   }

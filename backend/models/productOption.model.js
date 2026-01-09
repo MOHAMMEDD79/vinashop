@@ -372,6 +372,41 @@ class ProductOption {
   }
 
   /**
+   * Set product options by value IDs
+   * Converts option value IDs to option type associations
+   * @param {number} productId - Product ID
+   * @param {number[]} valueIds - Array of option value IDs
+   */
+  static async setProductOptionsByValueIds(productId, valueIds) {
+    // Remove existing options
+    await query('DELETE FROM product_options WHERE product_id = ?', [productId]);
+
+    if (!valueIds || valueIds.length === 0) {
+      return await this.getProductOptions(productId);
+    }
+
+    // Get unique option type IDs from the value IDs
+    const placeholders = valueIds.map(() => '?').join(',');
+    const typesSql = `
+      SELECT DISTINCT option_type_id
+      FROM product_option_values
+      WHERE option_value_id IN (${placeholders})
+    `;
+    const types = await query(typesSql, valueIds);
+
+    // Add option type associations
+    for (let i = 0; i < types.length; i++) {
+      await query(
+        `INSERT INTO product_options (product_id, option_type_id, is_required, display_order, created_at)
+         VALUES (?, ?, ?, ?, NOW())`,
+        [productId, types[i].option_type_id, 0, i]
+      );
+    }
+
+    return await this.getProductOptions(productId);
+  }
+
+  /**
    * Add option to product
    */
   static async addProductOption(productId, optionTypeId, isRequired = false) {

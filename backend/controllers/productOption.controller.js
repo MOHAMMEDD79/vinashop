@@ -516,15 +516,27 @@ const getProductOptions = async (req, res, next) => {
 
 /**
  * Set product options
+ * Accepts either:
+ * - { options: [{ option_type_id, is_required }] } - array of option types
+ * - { option_value_ids: [1, 2, 3] } - array of option value IDs (will be converted to types)
  */
 const setProductOptions = async (req, res, next) => {
   try {
     const { productId, product_id } = req.params;
     const pId = productId || product_id;
-    const { options } = req.body;
+    const { options, option_value_ids, optionValueIds } = req.body;
 
+    // Handle option_value_ids format (from frontend product form)
+    const valueIds = option_value_ids || optionValueIds;
+    if (valueIds && Array.isArray(valueIds)) {
+      // Convert option value IDs to option type associations
+      const result = await productOptionService.setProductOptionsByValueIds(pId, valueIds);
+      return successResponse(res, result, 'Product options updated successfully');
+    }
+
+    // Handle traditional options array format
     if (!options || !Array.isArray(options)) {
-      return errorResponse(res, 'Options array is required', HTTP_STATUS.BAD_REQUEST, ERROR_CODES.MISSING_REQUIRED_FIELD);
+      return errorResponse(res, 'Options array or option_value_ids array is required', HTTP_STATUS.BAD_REQUEST, ERROR_CODES.MISSING_REQUIRED_FIELD);
     }
 
     const result = await productOptionService.setProductOptions(pId, options);
