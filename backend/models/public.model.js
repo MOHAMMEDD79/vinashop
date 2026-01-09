@@ -31,7 +31,7 @@ class PublicModel {
 
     const offset = (page - 1) * limit;
     const params = [];
-    let whereClause = 'WHERE p.is_active = 1 AND p.stock_quantity > 0';
+    let whereClause = 'WHERE p.is_active = 1';
 
     if (search) {
       whereClause += ` AND (p.product_name_en LIKE ? OR p.product_name_ar LIKE ? OR p.sku LIKE ?)`;
@@ -306,8 +306,7 @@ class PublicModel {
         p.average_rating,
         (SELECT image_url FROM product_images WHERE product_id = p.product_id AND is_primary = 1 LIMIT 1) as primary_image
       FROM products p
-      WHERE p.is_active = 1 AND p.is_featured = 1 AND p.stock_quantity > 0
-      ORDER BY p.created_at DESC
+      WHERE p.is_active = 1 AND p.is_featured = 1       ORDER BY p.created_at DESC
       LIMIT ?
     `, [limit]);
   }
@@ -329,8 +328,7 @@ class PublicModel {
         p.average_rating,
         (SELECT image_url FROM product_images WHERE product_id = p.product_id AND is_primary = 1 LIMIT 1) as primary_image
       FROM products p
-      WHERE p.is_active = 1 AND p.stock_quantity > 0
-      ORDER BY p.created_at DESC
+      WHERE p.is_active = 1       ORDER BY p.created_at DESC
       LIMIT ?
     `, [limit]);
   }
@@ -672,8 +670,7 @@ class PublicModel {
       WHERE p.category_id = ?
         AND p.product_id != ?
         AND p.is_active = 1
-        AND p.stock_quantity > 0
-      ORDER BY RAND()
+              ORDER BY RAND()
       LIMIT ?
     `, [categoryId, productId, limit]);
   }
@@ -711,8 +708,7 @@ class PublicModel {
       FROM product_colors pc
       INNER JOIN product_variants pv ON pc.color_id = pv.color_id
       INNER JOIN products p ON pv.product_id = p.product_id
-      WHERE p.is_active = 1 AND p.stock_quantity > 0
-      ORDER BY pc.color_id
+      WHERE p.is_active = 1       ORDER BY pc.color_id
     `);
   }
 
@@ -750,8 +746,7 @@ class PublicModel {
       FROM product_sizes ps
       INNER JOIN product_variants pv ON ps.size_id = pv.size_id
       INNER JOIN products p ON pv.product_id = p.product_id
-      WHERE p.is_active = 1 AND p.stock_quantity > 0
-      ORDER BY ps.size_id
+      WHERE p.is_active = 1       ORDER BY ps.size_id
     `);
   }
 
@@ -915,7 +910,7 @@ class PublicModel {
     }
 
     const placeholders = subcategoryIds.map(() => '?').join(',');
-    let whereClause = `WHERE p.is_active = 1 AND p.stock_quantity > 0 AND p.subcategory_id IN (${placeholders})`;
+    let whereClause = `WHERE p.is_active = 1 AND p.subcategory_id IN (${placeholders})`;
     params.push(...subcategoryIds);
 
     if (min_price !== undefined) {

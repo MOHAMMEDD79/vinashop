@@ -66,6 +66,67 @@ router.get('/tables', async (req, res) => {
 });
 
 /**
+ * GET /api/admin/v1/test/debug-admin
+ * Debug admin login (TEMPORARY - REMOVE IN PRODUCTION)
+ */
+router.get('/debug-admin', async (req, res) => {
+  try {
+    const bcrypt = require('bcryptjs');
+    const testPassword = 'Shahid@2026##123$$';
+
+    // Check admin_users table
+    const adminUsers = await query('SELECT admin_id, username, email, password_hash, is_active FROM admin_users WHERE email = ?', ['admin@vinashop.com']);
+
+    // Check admins table
+    const admins = await query('SELECT admin_id, email, password, is_active FROM admins WHERE email = ?', ['admin@vinashop.com']);
+
+    let passwordMatch1 = false;
+    let passwordMatch2 = false;
+
+    if (adminUsers.length > 0 && adminUsers[0].password_hash) {
+      passwordMatch1 = await bcrypt.compare(testPassword, adminUsers[0].password_hash);
+    }
+
+    if (admins.length > 0 && admins[0].password) {
+      passwordMatch2 = await bcrypt.compare(testPassword, admins[0].password);
+    }
+
+    res.json({
+      success: true,
+      admin_users_table: {
+        found: adminUsers.length > 0,
+        data: adminUsers.length > 0 ? {
+          admin_id: adminUsers[0].admin_id,
+          email: adminUsers[0].email,
+          username: adminUsers[0].username,
+          is_active: adminUsers[0].is_active,
+          password_hash_length: adminUsers[0].password_hash?.length,
+          password_hash_preview: adminUsers[0].password_hash?.substring(0, 20) + '...',
+          password_matches: passwordMatch1
+        } : null
+      },
+      admins_table: {
+        found: admins.length > 0,
+        data: admins.length > 0 ? {
+          admin_id: admins[0].admin_id,
+          email: admins[0].email,
+          is_active: admins[0].is_active,
+          password_length: admins[0].password?.length,
+          password_preview: admins[0].password?.substring(0, 20) + '...',
+          password_matches: passwordMatch2
+        } : null
+      }
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'Debug failed',
+      error: error.message,
+    });
+  }
+});
+
+/**
  * GET /api/admin/v1/test/describe/:table
  * Describe table structure (PUBLIC - for debugging)
  */
@@ -1647,14 +1708,30 @@ router.delete('/products/:id', authenticate, async (req, res) => {
       });
     }
 
-    // Delete related data first
-    await query('DELETE FROM product_images WHERE product_id = ?', [id]);
-    await query('DELETE FROM product_option_combinations WHERE product_id = ?', [id]);
-    await query('DELETE FROM product_attributes WHERE product_id = ?', [id]);
-    await query('DELETE FROM product_options WHERE product_id = ?', [id]);
-    await query('DELETE FROM cart_items WHERE product_id = ?', [id]);
-    await query('DELETE FROM wishlist WHERE product_id = ?', [id]);
-    await query('DELETE FROM product_reviews WHERE product_id = ?', [id]);
+    // Helper to safely delete from tables (ignores if table doesn't exist)
+    const safeDelete = async (sql, params) => {
+      try {
+        await query(sql, params);
+      } catch (err) {
+        // Ignore table doesn't exist errors (1146)
+        if (err.errno !== 1146) throw err;
+      }
+    };
+
+    // Delete related data first (tables with foreign keys)
+    await safeDelete('DELETE FROM product_images WHERE product_id = ?', [id]);
+    await safeDelete('DELETE FROM product_option_combinations WHERE product_id = ?', [id]);
+    await safeDelete('DELETE FROM product_attributes WHERE product_id = ?', [id]);
+    await safeDelete('DELETE FROM product_options WHERE product_id = ?', [id]);
+    await safeDelete('DELETE FROM cart_items WHERE product_id = ?', [id]);
+    await safeDelete('DELETE FROM wishlist WHERE product_id = ?', [id]);
+    await safeDelete('DELETE FROM product_reviews WHERE product_id = ?', [id]);
+
+    // Delete from bill/invoice tables (no cascade)
+    await safeDelete('DELETE FROM customer_bill_items WHERE product_id = ?', [id]);
+    await safeDelete('DELETE FROM trader_bill_items WHERE product_id = ?', [id]);
+    await safeDelete('DELETE FROM wholesaler_order_items WHERE product_id = ?', [id]);
+    await safeDelete('UPDATE invoice_items SET product_id = NULL WHERE product_id = ?', [id]);
 
     // Delete product
     await query('DELETE FROM products WHERE product_id = ?', [id]);
