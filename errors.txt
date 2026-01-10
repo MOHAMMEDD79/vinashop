@@ -1,41 +1,16 @@
-login:1 [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) <input class=​"form-control" placeholder=​"Password" required type=​"password" value>​
-index-Db6VKnGS.js:192 null
-login:1 Access to XMLHttpRequest at 'https://api-v2.vinashop.ps/api/admin/v1/auth/login' from origin 'https://www.dashboard.vinashop.ps' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
-index-Db6VKnGS.js:189  POST https://api-v2.vinashop.ps/api/admin/v1/auth/login net::ERR_FAILED 500 (Internal Server Error)
-(anonymous) @ index-Db6VKnGS.js:189
-xhr @ index-Db6VKnGS.js:189
-LS @ index-Db6VKnGS.js:191
-Promise.then
-_request @ index-Db6VKnGS.js:192
-request @ index-Db6VKnGS.js:191
-(anonymous) @ index-Db6VKnGS.js:192
-(anonymous) @ index-Db6VKnGS.js:187
-login @ index-Db6VKnGS.js:192
-o @ index-Db6VKnGS.js:192
-S @ index-Db6VKnGS.js:192
-w_ @ index-Db6VKnGS.js:8
-(anonymous) @ index-Db6VKnGS.js:8
-T0 @ index-Db6VKnGS.js:8
-Um @ index-Db6VKnGS.js:8
-eg @ index-Db6VKnGS.js:9
-c4 @ index-Db6VKnGS.js:9
-index-Db6VKnGS.js:192 null
-login:1 Access to XMLHttpRequest at 'https://api-v2.vinashop.ps/api/admin/v1/auth/login' from origin 'https://www.dashboard.vinashop.ps' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
-index-Db6VKnGS.js:189  POST https://api-v2.vinashop.ps/api/admin/v1/auth/login net::ERR_FAILED 500 (Internal Server Error)
-(anonymous) @ index-Db6VKnGS.js:189
-xhr @ index-Db6VKnGS.js:189
-LS @ index-Db6VKnGS.js:191
-Promise.then
-_request @ index-Db6VKnGS.js:192
-request @ index-Db6VKnGS.js:191
-(anonymous) @ index-Db6VKnGS.js:192
-(anonymous) @ index-Db6VKnGS.js:187
-login @ index-Db6VKnGS.js:192
-o @ index-Db6VKnGS.js:192
-S @ index-Db6VKnGS.js:192
-w_ @ index-Db6VKnGS.js:8
-(anonymous) @ index-Db6VKnGS.js:8
-T0 @ index-Db6VKnGS.js:8
-Um @ index-Db6VKnGS.js:8
-eg @ index-Db6VKnGS.js:9
-c4 @ index-Db6VKnGS.js:9
+content-script-start.js:1144 Uncaught (in promise) Error: Could not establish connection. Receiving end does not exist.
+    at wrappedSendMessageCallback (content-script-start.js:1144:20)
+content-script-start.js:1144 Uncaught (in promise) Error: Could not establish connection. Receiving end does not exist.
+    at wrappedSendMessageCallback (content-script-start.js:1144:20)
+react-dom_client.js?v=29c1438e:5594 React has detected a change in the order of Hooks called by CartDrawer. This will lead to bugs and errors if not fixed. For more information, read the Rules of Hooks: https://react.dev/link/rules-of-hooks
+
+   Previous render            Next render
+   ------------------------------------------------------
+1. useContext                 useContext
+2. useContext                 useContext
+3. undefined                  useEffect
+   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+updateHookTypesDev @ react-dom_client.js?v=29c1438e:5594
+react-dom_client.js?v=29c1438e:5690 Internal React error: Expected static flag was missing. Please notify the React team.
+finishRenderingHooks @ react-dom_client.js?v=29c1438e:5690

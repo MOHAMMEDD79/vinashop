@@ -422,69 +422,18 @@ const ProductDetailPage = () => {
               className="add-to-cart-main-btn"
               onClick={handleAddToCart}
               disabled={stock <= 0}
-              style={{
-                width: '100%',
-                padding: '18px 32px',
-                fontSize: '18px',
-                fontWeight: 'bold',
-                backgroundColor: addedToCart ? '#28a745' : (stock <= 0 ? '#ccc' : '#c9a227'),
-                color: 'white',
-                border: 'none',
-                borderRadius: '10px',
-                cursor: stock <= 0 ? 'not-allowed' : 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '10px',
-                marginTop: '20px',
-                marginBottom: '10px'
-              }}
             >
               {addedToCart ? (
                 <>
-                  <FiCheck size={22} />
-                  {language === 'ar' ? 'تمت الإضافة للسلة!' : 'Added to Cart!'}
+                  <FiCheck size={20} />
+                  {language === 'ar' ? 'تمت الإضافة!' : 'Added!'}
                 </>
               ) : (
                 <>
-                  <FiShoppingCart size={22} />
+                  <FiShoppingCart size={20} />
                   {language === 'ar' ? 'أضف إلى السلة' : 'Add to Cart'}
                 </>
               )}
-            </button>
-
-            {/* ADD TO WISHLIST BUTTON */}
-            <button
-              onClick={() => toggleWishlist(product)}
-              style={{
-                width: '100%',
-                padding: '14px 32px',
-                fontSize: '16px',
-                fontWeight: '600',
-                backgroundColor: isInWishlist(product.product_id) ? '#fef2f2' : 'transparent',
-                color: isInWishlist(product.product_id) ? '#ef4444' : '#374151',
-                border: isInWishlist(product.product_id) ? '2px solid #ef4444' : '2px solid #d1d5db',
-                borderRadius: '10px',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '10px',
-                marginBottom: '20px',
-                transition: 'all 0.3s ease'
-              }}
-            >
-              <FiHeart
-                size={20}
-                style={{
-                  fill: isInWishlist(product.product_id) ? '#ef4444' : 'none',
-                  color: isInWishlist(product.product_id) ? '#ef4444' : '#374151'
-                }}
-              />
-              {isInWishlist(product.product_id)
-                ? (language === 'ar' ? 'في قائمة الرغبات' : 'In Wishlist')
-                : (language === 'ar' ? 'أضف لقائمة الرغبات' : 'Add to Wishlist')
-              }
             </button>
 
             {/* Stock Status */}

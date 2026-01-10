@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- مضيف: localhost:3306
--- وقت الجيل: 01 يناير 2026 الساعة 21:21
+-- وقت الجيل: 09 يناير 2026 الساعة 23:15
 -- إصدار الخادم: 8.0.33-cll-lve
 -- نسخة PHP: 8.4.16
 
@@ -40,13 +40,6 @@ CREATE TABLE `admins` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- إرجاع أو استيراد بيانات الجدول `admins`
---
-
-INSERT INTO `admins` (`admin_id`, `email`, `password`, `first_name`, `last_name`, `role`, `is_active`, `avatar`, `phone`, `created_at`, `updated_at`) VALUES
-(1, 'admin@vinashop.com', '$2b$10$41mWPLcnrfKpAfOov/Uq.udFrn48CAb3O.YhjWyBQYLIwP0uNYBRq', 'Admin', 'User', 'super_admin', 1, NULL, NULL, '2025-12-31 21:04:39', '2025-12-31 21:05:04');
 
 -- --------------------------------------------------------
 
@@ -110,13 +103,6 @@ CREATE TABLE `admin_users` (
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- إرجاع أو استيراد بيانات الجدول `admin_users`
---
-
-INSERT INTO `admin_users` (`admin_id`, `username`, `email`, `password_hash`, `full_name`, `role`, `is_active`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin@vinashop.com', '$2b$10$41mWPLcnrfKpAfOov/Uq.udFrn48CAb3O.YhjWyBQYLIwP0uNYBRq', 'Admin User', 'super_admin', 1, '2025-12-31 21:04:52', '2025-12-31 21:05:00');
-
 -- --------------------------------------------------------
 
 --
@@ -141,14 +127,6 @@ CREATE TABLE `banners` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- إرجاع أو استيراد بيانات الجدول `banners`
---
-
-INSERT INTO `banners` (`banner_id`, `title_en`, `title_ar`, `subtitle_en`, `subtitle_ar`, `media_path`, `media_type`, `mime_type`, `link_type`, `link_value`, `display_order`, `is_active`, `start_date`, `end_date`, `created_at`, `updated_at`) VALUES
-(1, NULL, NULL, NULL, NULL, 'uploads/banners/drone003g-1767215143853-67ea69cb-601f-4fab-8c1a-d9b1434496b3.jpg', 'image', 'image/jpeg', 'none', NULL, 0, 1, NULL, NULL, '2025-12-31 21:05:43', '2025-12-31 21:05:43'),
-(2, 'm', NULL, NULL, NULL, 'uploads/banners/44-1767294491230-95396957-4370-4514-aa1d-b8b358db4c53.jpg', 'image', 'image/jpeg', 'none', NULL, 1, 1, NULL, NULL, '2026-01-01 19:08:11', '2026-01-01 19:08:11');
 
 -- --------------------------------------------------------
 
@@ -186,13 +164,6 @@ CREATE TABLE `bill_sequences` (
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- إرجاع أو استيراد بيانات الجدول `bill_sequences`
---
-
-INSERT INTO `bill_sequences` (`sequence_id`, `sequence_type`, `prefix`, `current_year`, `last_number`, `updated_at`) VALUES
-(1, 'customer_bill', 'BILL', 2026, 3, '2026-01-01 20:50:09');
-
 -- --------------------------------------------------------
 
 --
@@ -229,13 +200,6 @@ CREATE TABLE `categories` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- إرجاع أو استيراد بيانات الجدول `categories`
---
-
-INSERT INTO `categories` (`category_id`, `category_name_en`, `category_name_ar`, `category_description_en`, `category_description_ar`, `category_image`, `display_order`, `is_featured`, `is_active`, `created_at`, `updated_at`) VALUES
-(1, 'asd', 'asd', NULL, NULL, NULL, 0, 0, 1, '2026-01-01 16:03:41', '2026-01-01 16:03:41');
 
 -- --------------------------------------------------------
 
@@ -287,13 +251,6 @@ CREATE TABLE `customer_bills` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `customer_bills`
---
-
-INSERT INTO `customer_bills` (`bill_id`, `user_id`, `order_id`, `bill_number`, `bill_date`, `customer_name`, `customer_phone`, `subtotal`, `tax_amount`, `discount_amount`, `total_amount`, `amount_paid`, `payment_status`, `notes`, `created_by`, `created_at`, `updated_at`) VALUES
-(1, NULL, NULL, 'BILL-2026-00003', '2026-01-01 00:00:00', 'asd', '059287292', 10.00, 0.00, 0.00, 10.00, 0.00, 'unpaid', NULL, 1, '2026-01-01 20:50:09', '2026-01-01 20:50:09');
-
---
 -- القوادح `customer_bills`
 --
 DELIMITER $$
@@ -328,13 +285,6 @@ CREATE TABLE `customer_bill_items` (
   `discount_percent` decimal(5,2) DEFAULT '0.00',
   `total_price` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- إرجاع أو استيراد بيانات الجدول `customer_bill_items`
---
-
-INSERT INTO `customer_bill_items` (`item_id`, `bill_id`, `product_id`, `variant_id`, `description`, `quantity`, `unit_price`, `discount_percent`, `total_price`) VALUES
-(1, 1, 1, NULL, 'asd', 1, 10.00, 0.00, 10.00);
 
 -- --------------------------------------------------------
 
@@ -477,17 +427,6 @@ CREATE TABLE `migrations` (
   `executed_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `checksum` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- إرجاع أو استيراد بيانات الجدول `migrations`
---
-
-INSERT INTO `migrations` (`id`, `name`, `executed_at`, `checksum`) VALUES
-(1, '20251225_001_add_salary_indexes.sql', '2025-12-31 22:55:46', 'ab20534cb92c8c4838e29aeaa59933cf4bc7dd3d909ccd494f7380be748516c1'),
-(2, '20251225_002_vinashop_guest_orders.sql', '2025-12-31 22:55:46', 'fdc244fc75815103f89565deb432a230c38e59bac42dace6fc4757860fbbb6dd'),
-(3, '20251225_003_vinashop_fixes.sql', '2025-12-31 22:55:46', '207d05a9539d3000f847c5bccb697a8b6567dcd4bfafa72fb477fe3cdd17e8d1'),
-(4, '20251226_001_add_color_options.sql', '2025-12-31 22:55:46', 'e5f2a5511987effc00958f6e666ab915b4952dbab4e680b81f89a174a18c4500'),
-(5, '20251227_001_allow_guest_reviews.sql', '2025-12-31 22:55:46', '8467ac3dc1834ce521d8964fb98e6056604750fbb9dc10abeb96dfe0cc7c7369');
 
 -- --------------------------------------------------------
 
@@ -647,15 +586,6 @@ CREATE TABLE `products` (
   `average_rating` decimal(3,2) DEFAULT '0.00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- إرجاع أو استيراد بيانات الجدول `products`
---
-
-INSERT INTO `products` (`product_id`, `category_id`, `subcategory_id`, `product_name_en`, `product_name_ar`, `product_description_en`, `product_description_ar`, `base_price`, `discount_percentage`, `sku`, `stock_quantity`, `is_active`, `is_featured`, `view_count`, `rating_average`, `rating_count`, `meta_keywords`, `created_at`, `updated_at`, `average_rating`) VALUES
-(1, 1, NULL, 'asd', 'asd', '', '', 10.00, 0.00, 'ASD-MJVMXM6U-51Y', 0, 1, 0, 0, 0.00, 0, NULL, '2026-01-01 16:04:09', '2026-01-01 16:04:09', 0.00),
-(2, 1, NULL, 'asd', 'asd', '', '', 9.98, 0.00, 'ASD-MJVMZ1H8', 0, 1, 0, 0, 0.00, 0, NULL, '2026-01-01 16:05:12', '2026-01-01 16:05:12', 0.00),
-(3, 1, NULL, 'dfgdfg', 'dfgdfg', '', '', 32.98, 0.00, 'DFG-MJVQ0TUU', 0, 1, 0, 0, 0.00, 0, NULL, '2026-01-01 17:30:34', '2026-01-01 17:30:34', 0.00);
-
 -- --------------------------------------------------------
 
 --
@@ -670,14 +600,6 @@ CREATE TABLE `product_images` (
   `display_order` int DEFAULT '0',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- إرجاع أو استيراد بيانات الجدول `product_images`
---
-
-INSERT INTO `product_images` (`image_id`, `product_id`, `image_url`, `is_primary`, `display_order`, `created_at`) VALUES
-(1, 1, 'uploads/products/drone003g-1767283449722-d56234a5-060d-4f11-9794-053be5f8bf64.jpg', 1, 0, '2026-01-01 16:04:10'),
-(2, 3, 'uploads/products/599689491-1172694888390181-8879928571604836770-n-1767288634858-9b01aa31-7cf5-4733-b5fc-a0bad48b51cc.jpg', 1, 0, '2026-01-01 17:30:35');
 
 -- --------------------------------------------------------
 
@@ -993,15 +915,15 @@ CREATE TABLE `transactions` (
 -- (See below for the actual view)
 --
 CREATE TABLE `v_trader_balance_summary` (
-`company_name` varchar(100)
+`trader_id` int
+,`company_name` varchar(100)
 ,`contact_person` varchar(100)
+,`phone` varchar(20)
 ,`credit_limit` decimal(12,2)
 ,`current_balance` decimal(12,2)
-,`partial_due` decimal(34,2)
-,`phone` varchar(20)
 ,`total_bills` bigint
-,`trader_id` int
 ,`unpaid_amount` decimal(34,2)
+,`partial_due` decimal(34,2)
 );
 
 -- --------------------------------------------------------
@@ -1011,16 +933,16 @@ CREATE TABLE `v_trader_balance_summary` (
 -- (See below for the actual view)
 --
 CREATE TABLE `v_wholesaler_balance_summary` (
-`company_name` varchar(100)
+`wholesaler_id` int
+,`company_name` varchar(100)
 ,`contact_person` varchar(100)
+,`phone` varchar(20)
+,`discount_percentage` decimal(5,2)
 ,`credit_limit` decimal(12,2)
 ,`current_balance` decimal(12,2)
-,`discount_percentage` decimal(5,2)
-,`partial_due` decimal(34,2)
-,`phone` varchar(20)
 ,`total_orders` bigint
 ,`unpaid_amount` decimal(34,2)
-,`wholesaler_id` int
+,`partial_due` decimal(34,2)
 );
 
 -- --------------------------------------------------------
@@ -1030,18 +952,18 @@ CREATE TABLE `v_wholesaler_balance_summary` (
 -- (See below for the actual view)
 --
 CREATE TABLE `v_worker_monthly_summary` (
-`base_salary` decimal(10,2)
-,`bonus` decimal(10,2)
-,`calculated_amount` decimal(10,2)
-,`days_worked` int
-,`deductions` decimal(10,2)
+`worker_id` int
 ,`full_name` varchar(100)
+,`position` varchar(50)
+,`base_salary` decimal(10,2)
 ,`month` int
+,`year` int
+,`days_worked` int
+,`calculated_amount` decimal(10,2)
+,`bonus` decimal(10,2)
+,`deductions` decimal(10,2)
 ,`net_salary` decimal(10,2)
 ,`payment_status` enum('pending','paid')
-,`position` varchar(50)
-,`worker_id` int
-,`year` int
 );
 
 -- --------------------------------------------------------
@@ -1066,13 +988,6 @@ CREATE TABLE `wholesalers` (
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- إرجاع أو استيراد بيانات الجدول `wholesalers`
---
-
-INSERT INTO `wholesalers` (`wholesaler_id`, `company_name`, `contact_person`, `phone`, `email`, `address`, `tax_number`, `discount_percentage`, `credit_limit`, `current_balance`, `status`, `notes`, `created_at`, `updated_at`) VALUES
-(1, 'asd', 'asdasd', '0592782902', 'moh@gmail.com', NULL, NULL, 0.00, 0.00, 0.00, 'active', NULL, '2026-01-01 20:34:57', '2026-01-01 20:34:57');
 
 -- --------------------------------------------------------
 
@@ -1742,7 +1657,7 @@ ALTER TABLE `worker_salaries`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `admin_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `admin_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `admin_activity_log`
@@ -1760,13 +1675,13 @@ ALTER TABLE `admin_traders`
 -- AUTO_INCREMENT for table `admin_users`
 --
 ALTER TABLE `admin_users`
-  MODIFY `admin_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `admin_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `banners`
 --
 ALTER TABLE `banners`
-  MODIFY `banner_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `banner_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `bill_images`
@@ -1778,7 +1693,7 @@ ALTER TABLE `bill_images`
 -- AUTO_INCREMENT for table `bill_sequences`
 --
 ALTER TABLE `bill_sequences`
-  MODIFY `sequence_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `sequence_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `cart_items`
@@ -1790,7 +1705,7 @@ ALTER TABLE `cart_items`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `category_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `category_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `contact_messages`
@@ -1802,13 +1717,13 @@ ALTER TABLE `contact_messages`
 -- AUTO_INCREMENT for table `customer_bills`
 --
 ALTER TABLE `customer_bills`
-  MODIFY `bill_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `bill_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `customer_bill_items`
 --
 ALTER TABLE `customer_bill_items`
-  MODIFY `item_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `item_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `customer_debts`
@@ -1844,7 +1759,7 @@ ALTER TABLE `invoice_items`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `notifications`
@@ -1886,13 +1801,13 @@ ALTER TABLE `phone_otps`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `product_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `product_images`
 --
 ALTER TABLE `product_images`
-  MODIFY `image_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `image_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `product_options`
@@ -1982,7 +1897,7 @@ ALTER TABLE `transactions`
 -- AUTO_INCREMENT for table `wholesalers`
 --
 ALTER TABLE `wholesalers`
-  MODIFY `wholesaler_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `wholesaler_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `wholesaler_orders`
@@ -2033,7 +1948,7 @@ ALTER TABLE `worker_salaries`
 --
 DROP TABLE IF EXISTS `v_trader_balance_summary`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`cpses_viju0qxcg8`@`localhost` SQL SECURITY DEFINER VIEW `v_trader_balance_summary`  AS SELECT `t`.`trader_id` AS `trader_id`, `t`.`company_name` AS `company_name`, `t`.`contact_person` AS `contact_person`, `t`.`phone` AS `phone`, `t`.`credit_limit` AS `credit_limit`, `t`.`current_balance` AS `current_balance`, count(distinct `tb`.`bill_id`) AS `total_bills`, coalesce(sum((case when (`tb`.`payment_status` = 'unpaid') then `tb`.`total_amount` else 0 end)),0) AS `unpaid_amount`, coalesce(sum((case when (`tb`.`payment_status` = 'partial') then `tb`.`amount_due` else 0 end)),0) AS `partial_due` FROM (`traders` `t` left join `trader_bills` `tb` on((`t`.`trader_id` = `tb`.`trader_id`))) GROUP BY `t`.`trader_id`, `t`.`company_name`, `t`.`contact_person`, `t`.`phone`, `t`.`credit_limit`, `t`.`current_balance` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_trader_balance_summary`  AS SELECT `t`.`trader_id` AS `trader_id`, `t`.`company_name` AS `company_name`, `t`.`contact_person` AS `contact_person`, `t`.`phone` AS `phone`, `t`.`credit_limit` AS `credit_limit`, `t`.`current_balance` AS `current_balance`, count(distinct `tb`.`bill_id`) AS `total_bills`, coalesce(sum((case when (`tb`.`payment_status` = 'unpaid') then `tb`.`total_amount` else 0 end)),0) AS `unpaid_amount`, coalesce(sum((case when (`tb`.`payment_status` = 'partial') then `tb`.`amount_due` else 0 end)),0) AS `partial_due` FROM (`traders` `t` left join `trader_bills` `tb` on((`t`.`trader_id` = `tb`.`trader_id`))) GROUP BY `t`.`trader_id`, `t`.`company_name`, `t`.`contact_person`, `t`.`phone`, `t`.`credit_limit`, `t`.`current_balance` ;
 
 -- --------------------------------------------------------
 
@@ -2042,7 +1957,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`cpses_viju0qxcg8`@`localhost` SQL SECURITY D
 --
 DROP TABLE IF EXISTS `v_wholesaler_balance_summary`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`cpses_viju0qxcg8`@`localhost` SQL SECURITY DEFINER VIEW `v_wholesaler_balance_summary`  AS SELECT `ws`.`wholesaler_id` AS `wholesaler_id`, `ws`.`company_name` AS `company_name`, `ws`.`contact_person` AS `contact_person`, `ws`.`phone` AS `phone`, `ws`.`discount_percentage` AS `discount_percentage`, `ws`.`credit_limit` AS `credit_limit`, `ws`.`current_balance` AS `current_balance`, count(distinct `wo`.`order_id`) AS `total_orders`, coalesce(sum((case when (`wo`.`payment_status` = 'unpaid') then `wo`.`total_amount` else 0 end)),0) AS `unpaid_amount`, coalesce(sum((case when (`wo`.`payment_status` = 'partial') then `wo`.`amount_due` else 0 end)),0) AS `partial_due` FROM (`wholesalers` `ws` left join `wholesaler_orders` `wo` on((`ws`.`wholesaler_id` = `wo`.`wholesaler_id`))) GROUP BY `ws`.`wholesaler_id`, `ws`.`company_name`, `ws`.`contact_person`, `ws`.`phone`, `ws`.`discount_percentage`, `ws`.`credit_limit`, `ws`.`current_balance` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_wholesaler_balance_summary`  AS SELECT `ws`.`wholesaler_id` AS `wholesaler_id`, `ws`.`company_name` AS `company_name`, `ws`.`contact_person` AS `contact_person`, `ws`.`phone` AS `phone`, `ws`.`discount_percentage` AS `discount_percentage`, `ws`.`credit_limit` AS `credit_limit`, `ws`.`current_balance` AS `current_balance`, count(distinct `wo`.`order_id`) AS `total_orders`, coalesce(sum((case when (`wo`.`payment_status` = 'unpaid') then `wo`.`total_amount` else 0 end)),0) AS `unpaid_amount`, coalesce(sum((case when (`wo`.`payment_status` = 'partial') then `wo`.`amount_due` else 0 end)),0) AS `partial_due` FROM (`wholesalers` `ws` left join `wholesaler_orders` `wo` on((`ws`.`wholesaler_id` = `wo`.`wholesaler_id`))) GROUP BY `ws`.`wholesaler_id`, `ws`.`company_name`, `ws`.`contact_person`, `ws`.`phone`, `ws`.`discount_percentage`, `ws`.`credit_limit`, `ws`.`current_balance` ;
 
 -- --------------------------------------------------------
 
@@ -2051,7 +1966,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`cpses_viju0qxcg8`@`localhost` SQL SECURITY D
 --
 DROP TABLE IF EXISTS `v_worker_monthly_summary`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`cpses_viju0qxcg8`@`localhost` SQL SECURITY DEFINER VIEW `v_worker_monthly_summary`  AS SELECT `w`.`worker_id` AS `worker_id`, `w`.`full_name` AS `full_name`, `w`.`position` AS `position`, `w`.`base_salary` AS `base_salary`, `ws`.`month` AS `month`, `ws`.`year` AS `year`, `ws`.`days_worked` AS `days_worked`, `ws`.`calculated_amount` AS `calculated_amount`, `ws`.`bonus` AS `bonus`, `ws`.`deductions` AS `deductions`, `ws`.`net_salary` AS `net_salary`, `ws`.`payment_status` AS `payment_status` FROM (`workers` `w` left join `worker_salaries` `ws` on((`w`.`worker_id` = `ws`.`worker_id`))) WHERE (`w`.`status` = 'active') ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_worker_monthly_summary`  AS SELECT `w`.`worker_id` AS `worker_id`, `w`.`full_name` AS `full_name`, `w`.`position` AS `position`, `w`.`base_salary` AS `base_salary`, `ws`.`month` AS `month`, `ws`.`year` AS `year`, `ws`.`days_worked` AS `days_worked`, `ws`.`calculated_amount` AS `calculated_amount`, `ws`.`bonus` AS `bonus`, `ws`.`deductions` AS `deductions`, `ws`.`net_salary` AS `net_salary`, `ws`.`payment_status` AS `payment_status` FROM (`workers` `w` left join `worker_salaries` `ws` on((`w`.`worker_id` = `ws`.`worker_id`))) WHERE (`w`.`status` = 'active') ;
 
 --
 -- القيود المفروضة على الجداول الملقاة

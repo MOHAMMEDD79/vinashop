@@ -221,27 +221,65 @@ const MyOrdersPage = () => {
 
                 <div className="details-section">
                   <h3>{isRTL ? 'المنتجات' : 'Products'}</h3>
-                  <ul className="order-items-list">
-                    {selectedOrder.items.map((item, idx) => (
-                      <li key={idx} className="order-item">
-                        <div className="item-image">
-                          <img
-                            src={getImageUrl(item.image)}
-                            alt={item.name}
-                            onError={(e) => { e.target.src = PLACEHOLDER_IMAGE; }}
-                          />
-                          <span className="item-qty">{item.quantity}</span>
+                  <div className="order-items-list-pro">
+                    {selectedOrder.items.map((item, idx) => {
+                      const optionsTotal = item.selectedOptions
+                        ? item.selectedOptions.reduce((sum, opt) => sum + (parseFloat(opt.additional_price) || 0), 0)
+                        : 0;
+
+                      return (
+                        <div key={idx} className="order-item-card">
+                          {/* Product Header */}
+                          <div className="item-header">
+                            <div className="item-image">
+                              <img
+                                src={getImageUrl(item.image)}
+                                alt={item.name}
+                                onError={(e) => { e.target.src = PLACEHOLDER_IMAGE; }}
+                              />
+                              <span className="item-qty">{item.quantity}</span>
+                            </div>
+                            <div className="item-main">
+                              <span className="item-name">{item.name}</span>
+                              <span className="item-unit-price">
+                                {item.quantity} × {formatPrice(item.price)}
+                              </span>
+                            </div>
+                            <span className="item-total">
+                              {formatPrice(item.price * item.quantity)}
+                            </span>
+                          </div>
+
+                          {/* Selected Options */}
+                          {item.selectedOptions && item.selectedOptions.length > 0 && (
+                            <div className="item-options-box">
+                              <div className="options-title">
+                                {isRTL ? 'الخيارات المحددة' : 'Selected Options'}
+                              </div>
+                              <div className="options-list">
+                                {item.selectedOptions.map((opt, optIdx) => (
+                                  <div key={optIdx} className="option-row">
+                                    <span className="option-label">
+                                      <strong>{opt.type_name}:</strong> {opt.value_name}
+                                    </span>
+                                    <span className={`option-price ${opt.additional_price > 0 ? 'has-price' : ''}`}>
+                                      {opt.additional_price > 0 ? `+${formatPrice(opt.additional_price)}` : formatPrice(0)}
+                                    </span>
+                                  </div>
+                                ))}
+                              </div>
+                              {optionsTotal > 0 && (
+                                <div className="options-total">
+                                  <span>{isRTL ? 'إجمالي الخيارات' : 'Options Total'}:</span>
+                                  <span className="options-total-price">+{formatPrice(optionsTotal)}</span>
+                                </div>
+                              )}
+                            </div>
+                          )}
                         </div>
-                        <div className="item-info">
-                          <span className="item-name">{item.name}</span>
-                          <span className="item-price">{formatPrice(item.price)}</span>
-                        </div>
-                        <span className="item-total">
-                          {formatPrice(item.price * item.quantity)}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
+                      );
+                    })}
+                  </div>
                 </div>
 
                 <div className="details-section totals">

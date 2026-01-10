@@ -216,54 +216,146 @@ const Orders = () => {
 
               <div style={{ marginTop: '20px' }}>
                 <h4 style={{ marginBottom: '10px', color: '#64748b' }}>{t('orders.items')}</h4>
-                <table>
-                  <thead>
-                    <tr>
-                      <th>{t('reviews.product')}</th>
-                      <th>{t('products.price')}</th>
-                      <th>{t('orders.items')}</th>
-                      <th>{t('orders.total')}</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {(selectedOrder.items || []).map((item, idx) => (
-                      <tr key={idx}>
-                        <td>{item.product_name || item.product_name_en || 'Product'}</td>
-                        <td>₪{parseFloat(item.unit_price || 0).toFixed(2)}</td>
-                        <td>{item.quantity}</td>
-                        <td>₪{parseFloat(item.total_price || 0).toFixed(2)}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                      <td colSpan="3" style={{ textAlign: 'right' }}><strong>{t('orders.subtotal')}:</strong></td>
-                      <td><strong>₪{parseFloat(selectedOrder.subtotal || 0).toFixed(2)}</strong></td>
-                    </tr>
-                    {parseFloat(selectedOrder.shipping_cost) > 0 && (
-                      <tr>
-                        <td colSpan="3" style={{ textAlign: 'right' }}>{t('orders.shipping')}:</td>
-                        <td>₪{parseFloat(selectedOrder.shipping_cost).toFixed(2)}</td>
-                      </tr>
-                    )}
-                    {parseFloat(selectedOrder.tax_amount) > 0 && (
-                      <tr>
-                        <td colSpan="3" style={{ textAlign: 'right' }}>{t('orders.tax')}:</td>
-                        <td>₪{parseFloat(selectedOrder.tax_amount).toFixed(2)}</td>
-                      </tr>
-                    )}
-                    {parseFloat(selectedOrder.discount_amount) > 0 && (
-                      <tr>
-                        <td colSpan="3" style={{ textAlign: 'right' }}>{t('orders.discount')}:</td>
-                        <td style={{ color: '#22c55e' }}>-₪{parseFloat(selectedOrder.discount_amount).toFixed(2)}</td>
-                      </tr>
-                    )}
-                    <tr>
-                      <td colSpan="3" style={{ textAlign: 'right' }}><strong>{t('orders.total')}:</strong></td>
-                      <td><strong>₪{parseFloat(selectedOrder.total_amount || 0).toFixed(2)}</strong></td>
-                    </tr>
-                  </tfoot>
-                </table>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                  {(selectedOrder.items || []).map((item, idx) => {
+                    // Parse selected_options if it's a string
+                    let selectedOptions = [];
+                    try {
+                      selectedOptions = typeof item.selected_options === 'string'
+                        ? JSON.parse(item.selected_options)
+                        : (item.selected_options || []);
+                    } catch (e) {
+                      selectedOptions = [];
+                    }
+
+                    const optionsTotal = selectedOptions.reduce((sum, opt) => sum + (parseFloat(opt.additional_price) || 0), 0);
+
+                    return (
+                      <div key={idx} style={{
+                        background: '#f8fafc',
+                        borderRadius: '8px',
+                        padding: '12px',
+                        border: '1px solid #e2e8f0'
+                      }}>
+                        {/* Product Header */}
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: selectedOptions.length > 0 ? '10px' : '0' }}>
+                          <div>
+                            <strong style={{ fontSize: '1rem', color: '#1e293b' }}>
+                              {item.product_name || item.product_name_en || 'Product'}
+                            </strong>
+                            <div style={{ fontSize: '0.85rem', color: '#64748b', marginTop: '2px' }}>
+                              {t('orders.items')}: {item.quantity} × ₪{parseFloat(item.unit_price || 0).toFixed(2)}
+                            </div>
+                          </div>
+                          <div style={{ textAlign: 'right' }}>
+                            <strong style={{ fontSize: '1.1rem', color: '#c9a227' }}>
+                              ₪{parseFloat(item.total_price || 0).toFixed(2)}
+                            </strong>
+                          </div>
+                        </div>
+
+                        {/* Selected Options */}
+                        {selectedOptions.length > 0 && (
+                          <div style={{
+                            background: '#fff',
+                            borderRadius: '6px',
+                            padding: '10px',
+                            border: '1px solid #e2e8f0'
+                          }}>
+                            <div style={{ fontSize: '0.75rem', fontWeight: '600', color: '#64748b', marginBottom: '8px', textTransform: 'uppercase' }}>
+                              {t('orders.options') || 'Options'}
+                            </div>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                              {selectedOptions.map((opt, optIdx) => (
+                                <div key={optIdx} style={{
+                                  display: 'flex',
+                                  justifyContent: 'space-between',
+                                  alignItems: 'center',
+                                  padding: '6px 8px',
+                                  background: '#f1f5f9',
+                                  borderRadius: '4px'
+                                }}>
+                                  <span style={{ color: '#475569' }}>
+                                    <span style={{ fontWeight: '500' }}>{opt.type_name}:</span> {opt.value_name}
+                                  </span>
+                                  {opt.additional_price > 0 ? (
+                                    <span style={{
+                                      color: '#22c55e',
+                                      fontWeight: '600',
+                                      background: '#dcfce7',
+                                      padding: '2px 8px',
+                                      borderRadius: '4px',
+                                      fontSize: '0.85rem'
+                                    }}>
+                                      +₪{parseFloat(opt.additional_price).toFixed(2)}
+                                    </span>
+                                  ) : (
+                                    <span style={{ color: '#94a3b8', fontSize: '0.85rem' }}>₪0.00</span>
+                                  )}
+                                </div>
+                              ))}
+                            </div>
+                            {optionsTotal > 0 && (
+                              <div style={{
+                                marginTop: '8px',
+                                paddingTop: '8px',
+                                borderTop: '1px dashed #e2e8f0',
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                                fontSize: '0.85rem'
+                              }}>
+                                <span style={{ color: '#64748b' }}>{t('orders.options') || 'Options'} {t('orders.total')}:</span>
+                                <strong style={{ color: '#22c55e' }}>+₪{optionsTotal.toFixed(2)}</strong>
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Order Totals */}
+                <div style={{
+                  marginTop: '16px',
+                  background: '#f8fafc',
+                  borderRadius: '8px',
+                  padding: '12px',
+                  border: '1px solid #e2e8f0'
+                }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                    <span>{t('orders.subtotal')}:</span>
+                    <strong>₪{parseFloat(selectedOrder.subtotal || 0).toFixed(2)}</strong>
+                  </div>
+                  {parseFloat(selectedOrder.shipping_cost) > 0 && (
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', color: '#64748b' }}>
+                      <span>{t('orders.shipping')}:</span>
+                      <span>₪{parseFloat(selectedOrder.shipping_cost).toFixed(2)}</span>
+                    </div>
+                  )}
+                  {parseFloat(selectedOrder.tax_amount) > 0 && (
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', color: '#64748b' }}>
+                      <span>{t('orders.tax')}:</span>
+                      <span>₪{parseFloat(selectedOrder.tax_amount).toFixed(2)}</span>
+                    </div>
+                  )}
+                  {parseFloat(selectedOrder.discount_amount) > 0 && (
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                      <span>{t('orders.discount')}:</span>
+                      <span style={{ color: '#22c55e' }}>-₪{parseFloat(selectedOrder.discount_amount).toFixed(2)}</span>
+                    </div>
+                  )}
+                  <div style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    paddingTop: '8px',
+                    borderTop: '2px solid #e2e8f0',
+                    fontSize: '1.1rem'
+                  }}>
+                    <strong>{t('orders.total')}:</strong>
+                    <strong style={{ color: '#c9a227' }}>₪{parseFloat(selectedOrder.total_amount || 0).toFixed(2)}</strong>
+                  </div>
+                </div>
               </div>
             </div>
             <div className="modal-footer">

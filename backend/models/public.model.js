@@ -560,27 +560,48 @@ class PublicModel {
       region,
       notes,
       items,
+      subtotal: frontendSubtotal,
+      delivery_fee: frontendDeliveryFee,
+      total: frontendTotal,
     } = orderData;
 
     return await transaction(async (connection) => {
-      // Calculate totals
-      let subtotal = 0;
-      for (const item of items) {
-        const [product] = await connection.execute(
-          'SELECT base_price, discount_percentage FROM products WHERE product_id = ?',
-          [item.product_id]
-        );
-        if (product.length > 0) {
-          const price = product[0].discount_percentage > 0
-            ? product[0].base_price * (1 - product[0].discount_percentage / 100)
-            : product[0].base_price;
-          subtotal += price * item.quantity;
+      // Use subtotal from frontend (includes options pricing) or calculate
+      let subtotal = frontendSubtotal || 0;
+
+      // If no frontend subtotal, calculate from items (including options)
+      if (!subtotal) {
+        for (const item of items) {
+          // Use price from frontend (already includes options and discount)
+          if (item.price) {
+            subtotal += item.price * item.quantity;
+          } else {
+            // Fallback: calculate from database
+            const [product] = await connection.execute(
+              'SELECT base_price, discount_percentage FROM products WHERE product_id = ?',
+              [item.product_id]
+            );
+            if (product.length > 0) {
+              let price = product[0].discount_percentage > 0
+                ? product[0].base_price * (1 - product[0].discount_percentage / 100)
+                : product[0].base_price;
+
+              // Add options additional price if available
+              if (item.selected_options && Array.isArray(item.selected_options)) {
+                for (const opt of item.selected_options) {
+                  price += parseFloat(opt.additional_price) || 0;
+                }
+              }
+
+              subtotal += price * item.quantity;
+            }
+          }
         }
       }
 
-      // Get delivery fee
-      let delivery_fee = 0;
-      if (delivery_method === 'delivery' && region) {
+      // Use delivery fee from frontend or calculate from settings
+      let delivery_fee = frontendDeliveryFee || 0;
+      if (!delivery_fee && delivery_method === 'delivery' && region) {
         const feeMap = {
           'west_bank': 'shipping_cost_west_bank',
           'jerusalem': 'shipping_cost_jerusalem',
@@ -595,7 +616,7 @@ class PublicModel {
         }
       }
 
-      const total = subtotal + delivery_fee;
+      const total = frontendTotal || (subtotal + delivery_fee);
 
       // Generate order number
       const orderNumber = `VS-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
@@ -607,12 +628,12 @@ class PublicModel {
           guest_name, guest_email, guest_phone, guest_city, guest_address, guest_area_code,
           delivery_method, delivery_fee, region,
           subtotal, shipping_cost, total_amount, notes, status
-        ) VALUES (?, NULL, NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, ?, ?, 'pending')
+        ) VALUES (?, NULL, NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending')
       `, [
         orderNumber, guest_name, guest_email, guest_phone,
         guest_city, guest_address, guest_area_code,
         delivery_method, delivery_fee, region,
-        subtotal, total, notes
+        subtotal, delivery_fee, total, notes
       ]);
 
       const orderId = orderResult.insertId;
@@ -626,9 +647,21 @@ class PublicModel {
 
         if (product.length > 0) {
           const p = product[0];
-          const unitPrice = p.discount_percentage > 0
-            ? p.base_price * (1 - p.discount_percentage / 100)
-            : p.base_price;
+
+          // Use price from frontend (includes discount + options) or calculate
+          let unitPrice = item.price;
+          if (!unitPrice) {
+            unitPrice = p.discount_percentage > 0
+              ? p.base_price * (1 - p.discount_percentage / 100)
+              : p.base_price;
+
+            // Add options additional price
+            if (item.selected_options && Array.isArray(item.selected_options)) {
+              for (const opt of item.selected_options) {
+                unitPrice += parseFloat(opt.additional_price) || 0;
+              }
+            }
+          }
 
           await connection.execute(`
             INSERT INTO order_items (

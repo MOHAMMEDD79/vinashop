@@ -94,8 +94,13 @@ const Header = () => {
     { to: '/contact', label: t('nav.contact'), icon: FiPhone }
   ];
 
-  // Mobile Menu Component - rendered via portal
-  const MobileMenu = () => {
+  // Handle mobile search input change
+  const handleMobileSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  // Render mobile menu portal
+  const renderMobileMenu = () => {
     if (typeof document === 'undefined') return null;
 
     return createPortal(
@@ -110,7 +115,7 @@ const Header = () => {
         <div className={`mobile-drawer ${isMenuOpen ? 'active' : ''} ${isRTL ? 'rtl' : 'ltr'}`}>
           {/* Drawer Header */}
           <div className="mobile-drawer-header">
-            <Link to="/" className="mobile-drawer-logo" onClick={() => setIsMenuOpen(false)}>
+            <Link to="/" className="mobile-drawer-logo" onClick={() => setIsMenuOpen(false)} dir="ltr">
               <span className="logo-text">Vina</span>
               <span className="logo-accent">Shop</span>
             </Link>
@@ -127,9 +132,14 @@ const Header = () => {
           <form className="mobile-drawer-search" onSubmit={handleSearch}>
             <input
               type="text"
+              inputMode="search"
+              autoComplete="off"
+              autoCorrect="off"
+              autoCapitalize="off"
+              spellCheck="false"
               placeholder={isRTL ? 'ابحثي عن المنتجات...' : 'Search for products...'}
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={handleMobileSearchChange}
             />
             <button type="submit" aria-label="Search">
               <FiSearch />
@@ -384,7 +394,7 @@ const Header = () => {
       </header>
 
       {/* Mobile Menu - rendered outside header via portal */}
-      <MobileMenu />
+      {renderMobileMenu()}
     </>
   );
 };

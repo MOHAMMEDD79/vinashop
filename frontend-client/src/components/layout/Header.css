@@ -504,6 +504,8 @@
   align-items: baseline;
   text-decoration: none;
   gap: 4px;
+  direction: ltr !important;
+  unicode-bidi: bidi-override;
 }
 
 .mobile-drawer-logo .logo-text,
@@ -513,6 +515,7 @@
   font-weight: normal;
   color: #000000;
   letter-spacing: 1px;
+  direction: ltr !important;
 }
 
 .mobile-drawer-close {
@@ -546,14 +549,24 @@
   padding: 14px 16px;
   border: 2px solid #e8e8e8;
   border-radius: 12px;
-  font-size: 15px;
+  font-size: 16px;
   background: white;
   transition: border-color 0.2s ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* Prevent iOS zoom on focus */
+  font-size: 16px !important;
 }
 
 .mobile-drawer-search input:focus {
   border-color: var(--color-gold);
   outline: none;
+  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.15);
+}
+
+.mobile-drawer-search input::placeholder {
+  color: #999;
 }
 
 .mobile-drawer-search button {
@@ -568,6 +581,9 @@
   justify-content: center;
   font-size: 18px;
   transition: transform 0.2s ease;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
 }
 
 .mobile-drawer-search button:active {

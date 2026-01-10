@@ -187,6 +187,24 @@
   font-size: var(--font-xs);
 }
 
+/* Selected Options (new options system) */
+.cart-item-selected-options {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: var(--font-xs);
+  color: var(--color-text-secondary);
+}
+
+.selected-option {
+  display: block;
+}
+
+.selected-option .option-extra {
+  color: var(--color-success);
+  font-weight: 500;
+}
+
 .cart-item-price {
   display: flex;
   align-items: center;

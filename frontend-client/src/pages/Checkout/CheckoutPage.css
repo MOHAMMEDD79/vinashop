@@ -42,7 +42,8 @@
 [dir="rtl"] .summary-item .item-qty { right: auto; left: -6px; }
 .summary-item .item-info { flex: 1; min-width: 0; }
 .summary-item .item-name { display: block; font-size: var(--font-sm); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.summary-item .item-option { font-size: var(--font-xs); color: var(--color-text-secondary); }
+.summary-item .item-option { font-size: var(--font-xs); color: var(--color-text-secondary); display: block; }
+.summary-item .item-options { display: flex; flex-direction: column; gap: 2px; margin-top: 4px; }
 .summary-item .item-price { font-weight: 600; white-space: nowrap; }
 .summary-totals { border-top: 1px solid var(--color-border); padding-top: var(--spacing-md); margin-bottom: var(--spacing-lg); }
 .summary-row { display: flex; justify-content: space-between; margin-bottom: var(--spacing-sm); font-size: var(--font-base); }

@@ -80,49 +80,56 @@ const CartDrawer = () => {
             </div>
           ) : (
             <ul className="cart-items">
-              {items.map((item) => (
-                <li key={item.id} className="cart-item">
-                  <div className="cart-item-image">
-                    <img
-                      src={getImageUrl(item.image)}
-                      alt={getLocalized(item, 'name')}
-                      onError={(e) => { e.target.src = PLACEHOLDER_IMAGE; }}
-                    />
-                  </div>
-                  <div className="cart-item-details">
-                    <h4 className="cart-item-name">
-                      {getLocalized(item, 'name')}
-                    </h4>
-                    {(item.selectedColorName || item.selectedSizeName) && (
-                      <div className="cart-item-options">
-                        {item.selectedColorHex && (
-                          <span
-                            className="color-dot"
-                            style={{ backgroundColor: item.selectedColorHex }}
-                          />
-                        )}
-                        {item.selectedSizeName && (
-                          <span className="size-label">{item.selectedSizeName}</span>
-                        )}
-                      </div>
-                    )}
-                    <div className="cart-item-price">
-                      {item.discountPrice ? (
-                        <>
-                          <span className="price-current">
-                            {formatPrice(item.discountPrice)}
-                          </span>
-                          <span className="price-original">
-                            {formatPrice(item.price)}
-                          </span>
-                        </>
-                      ) : (
-                        <span className="price-current">
-                          {formatPrice(item.price)}
-                        </span>
-                      )}
+              {items.map((item) => {
+                // item.price already includes options from ProductDetailPage
+                const itemPrice = item.discountPrice || item.price;
+
+                return (
+                  <li key={item.id} className="cart-item">
+                    <div className="cart-item-image">
+                      <img
+                        src={getImageUrl(item.image)}
+                        alt={getLocalized(item, 'name')}
+                        onError={(e) => { e.target.src = PLACEHOLDER_IMAGE; }}
+                      />
                     </div>
-                  </div>
+                    <div className="cart-item-details">
+                      <h4 className="cart-item-name">
+                        {getLocalized(item, 'name')}
+                      </h4>
+                      {/* Legacy color/size options */}
+                      {(item.selectedColorName || item.selectedSizeName) && (
+                        <div className="cart-item-options">
+                          {item.selectedColorHex && (
+                            <span
+                              className="color-dot"
+                              style={{ backgroundColor: item.selectedColorHex }}
+                            />
+                          )}
+                          {item.selectedSizeName && (
+                            <span className="size-label">{item.selectedSizeName}</span>
+                          )}
+                        </div>
+                      )}
+                      {/* New options system */}
+                      {item.selectedOptions && item.selectedOptions.length > 0 && (
+                        <div className="cart-item-selected-options">
+                          {item.selectedOptions.map((opt, idx) => (
+                            <span key={idx} className="selected-option">
+                              {opt.type_name}: {opt.value_name}
+                              {opt.additional_price > 0 && (
+                                <span className="option-extra"> (+{formatPrice(opt.additional_price)})</span>
+                              )}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                      <div className="cart-item-price">
+                        <span className="price-current">
+                          {formatPrice(itemPrice)}
+                        </span>
+                      </div>
+                    </div>
                   <div className="cart-item-actions">
                     <div className="quantity-control">
                       <button
@@ -148,7 +155,8 @@ const CartDrawer = () => {
                     </button>
                   </div>
                 </li>
-              ))}
+                );
+              })}
             </ul>
           )}
         </div>

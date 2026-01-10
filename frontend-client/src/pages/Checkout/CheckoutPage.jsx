@@ -80,8 +80,10 @@ const CheckoutPage = () => {
         items: items.map(item => ({
           name: getLocalized(item, 'name'),
           quantity: item.quantity,
+          // item.price already includes options from ProductDetailPage
           price: item.discountPrice || item.price,
-          image: item.image
+          image: item.image,
+          selectedOptions: item.selectedOptions || []
         })),
         subtotal: subtotal,
         deliveryFee: deliveryFee,
@@ -132,6 +134,7 @@ const CheckoutPage = () => {
           product_id: item.productId,
           variant_id: item.variantId,
           quantity: item.quantity,
+          // item.price already includes options from ProductDetailPage
           price: item.discountPrice || item.price,
           selected_options: item.selectedOptions || []
         })),
@@ -295,25 +298,40 @@ const CheckoutPage = () => {
             <h2>{t('checkout.orderSummary')}</h2>
 
             <ul className="summary-items">
-              {items.map((item) => (
-                <li key={item.id} className="summary-item">
-                  <div className="item-image">
-                    <img
-                      src={getImageUrl(item.image)}
-                      alt={getLocalized(item, 'name')}
-                      onError={(e) => { e.target.src = PLACEHOLDER_IMAGE; }}
-                    />
-                    <span className="item-qty">{item.quantity}</span>
-                  </div>
-                  <div className="item-info">
-                    <span className="item-name">{getLocalized(item, 'name')}</span>
-                    {item.selectedSizeName && <span className="item-option">{item.selectedSizeName}</span>}
-                  </div>
-                  <span className="item-price">
-                    {formatPrice((item.discountPrice || item.price) * item.quantity)}
-                  </span>
-                </li>
-              ))}
+              {items.map((item) => {
+                // item.price already includes options from ProductDetailPage
+                const itemPrice = item.discountPrice || item.price;
+
+                return (
+                  <li key={item.id} className="summary-item">
+                    <div className="item-image">
+                      <img
+                        src={getImageUrl(item.image)}
+                        alt={getLocalized(item, 'name')}
+                        onError={(e) => { e.target.src = PLACEHOLDER_IMAGE; }}
+                      />
+                      <span className="item-qty">{item.quantity}</span>
+                    </div>
+                    <div className="item-info">
+                      <span className="item-name">{getLocalized(item, 'name')}</span>
+                      {item.selectedSizeName && <span className="item-option">{item.selectedSizeName}</span>}
+                      {item.selectedOptions && item.selectedOptions.length > 0 && (
+                        <div className="item-options">
+                          {item.selectedOptions.map((opt, idx) => (
+                            <span key={idx} className="item-option">
+                              {opt.type_name}: {opt.value_name}
+                              {opt.additional_price > 0 && ` (+${formatPrice(opt.additional_price)})`}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                    <span className="item-price">
+                      {formatPrice(itemPrice * item.quantity)}
+                    </span>
+                  </li>
+                );
+              })}
             </ul>
 
             <div className="summary-totals">

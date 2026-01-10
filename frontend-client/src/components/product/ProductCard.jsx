@@ -14,6 +14,7 @@ const ProductCard = ({ product }) => {
     slug,
     price,
     discount_price,
+    discount_percentage,
     primary_image,
     stock_quantity,
     is_featured,
@@ -22,8 +23,11 @@ const ProductCard = ({ product }) => {
 
   const name = getLocalized(product, 'name');
   const isNew = created_at && (Date.now() - new Date(created_at).getTime()) < 7 * 24 * 60 * 60 * 1000;
-  const hasDiscount = discount_price && discount_price < price;
-  const discountPercent = hasDiscount ? Math.round((1 - discount_price / price) * 100) : 0;
+
+  // Calculate discount price from percentage if not provided directly
+  const calculatedDiscountPrice = discount_price || (discount_percentage > 0 ? price * (1 - discount_percentage / 100) : null);
+  const hasDiscount = calculatedDiscountPrice && calculatedDiscountPrice < price;
+  const discountPercent = discount_percentage || (hasDiscount ? Math.round((1 - calculatedDiscountPrice / price) * 100) : 0);
   const isOutOfStock = stock_quantity <= 0;
 
   const handleQuickAdd = (e) => {
@@ -91,7 +95,7 @@ const ProductCard = ({ product }) => {
           <div className="product-price">
             {hasDiscount ? (
               <>
-                <span className="price-current">{formatPrice(discount_price)}</span>
+                <span className="price-current">{formatPrice(calculatedDiscountPrice)}</span>
                 <span className="price-original">{formatPrice(price)}</span>
               </>
             ) : (

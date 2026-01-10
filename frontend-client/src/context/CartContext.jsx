@@ -59,6 +59,7 @@ export const CartProvider = ({ children }) => {
   // Calculate totals
   const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
 
+  // Note: item.price already includes options additional_price from ProductDetailPage
   const subtotal = items.reduce((sum, item) => {
     const price = item.discountPrice || item.price;
     return sum + (price * item.quantity);
