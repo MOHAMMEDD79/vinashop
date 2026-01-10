@@ -10,11 +10,6 @@ const CartDrawer = () => {
   const { t, getLocalized, isRTL } = useLanguage();
   const { items, isOpen, isInitialized, closeCart, updateQuantity, removeItem, subtotal, itemCount } = useCart();
 
-  // Don't render until cart is initialized to prevent flash
-  if (!isInitialized) {
-    return null;
-  }
-
   // Prevent body scroll when drawer is open
   useEffect(() => {
     if (isOpen) {
@@ -35,6 +30,11 @@ const CartDrawer = () => {
     window.addEventListener('keydown', handleEscape);
     return () => window.removeEventListener('keydown', handleEscape);
   }, [closeCart]);
+
+  // Don't render until cart is initialized to prevent flash
+  if (!isInitialized) {
+    return null;
+  }
 
   return (
     <>

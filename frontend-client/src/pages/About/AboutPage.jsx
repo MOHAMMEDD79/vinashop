@@ -153,36 +153,14 @@ const AboutPage = () => {
         <div className="container">
           <div className="section-header">
             <h2 className="section-title">{isRTL ? 'سياسة الإرجاع والتبديل' : 'Return & Exchange Policy'}</h2>
-            <p className="section-subtitle">
-              {isRTL
-                ? 'نحرص على رضاكم ونلتزم بالشفافية'
-                : 'We care about your satisfaction and commit to transparency'
-              }
-            </p>
           </div>
           <div className="policy-content">
-            <ul className="policy-list">
-              <li>
-                <span className="policy-icon">🚫</span>
-                <span>{isRTL ? 'الإرجاع ممنوع إلا في حال حدوث خلل أو عيب بالمنتج' : 'Returns are not allowed except in case of product defect'}</span>
-              </li>
-              <li>
-                <span className="policy-icon">📸</span>
-                <span>{isRTL ? 'يجب أن يكون المنتج بنفس حالة الاستلام والتواصل معنا مع إرفاق الصور' : 'Product must be in the same condition as received and contact us with photos'}</span>
-              </li>
-              <li>
-                <span className="policy-icon">⏰</span>
-                <span>{isRTL ? 'التبديل خلال يوم أو يومين كحد أقصى' : 'Exchange within 1-2 days maximum'}</span>
-              </li>
-              <li>
-                <span className="policy-icon">📦</span>
-                <span>{isRTL ? 'التبديل يقتصر على المنتجات غير القابلة للكسر' : 'Exchange is limited to non-breakable products'}</span>
-              </li>
-              <li>
-                <span className="policy-icon">🧣</span>
-                <span>{isRTL ? 'تبديل الشالات ممنوع' : 'Shawl exchange is not allowed'}</span>
-              </li>
-            </ul>
+            <p className="policy-statement">
+              {isRTL
+                ? 'في Vina Shop، الثقة والوضوح أساس تعاملنا، وإن لم تكن القطعة مطابقة لما اتفقنا عليه، يسعدنا إرجاعها بكل راحة'
+                : 'At Vina Shop, trust and transparency are the foundation of our dealings. If the item does not match what we agreed upon, we are happy to accept returns with ease'
+              }
+            </p>
           </div>
         </div>
       </section>
