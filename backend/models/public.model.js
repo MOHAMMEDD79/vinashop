@@ -34,9 +34,9 @@ class PublicModel {
     let whereClause = 'WHERE p.is_active = 1';
 
     if (search) {
-      whereClause += ` AND (p.product_name_en LIKE ? OR p.product_name_ar LIKE ? OR p.sku LIKE ?)`;
+      whereClause += ` AND (p.product_name_en LIKE ? OR p.product_name_ar LIKE ? OR p.sku LIKE ? OR p.meta_keywords LIKE ?)`;
       const searchTerm = `%${search}%`;
-      params.push(searchTerm, searchTerm, searchTerm);
+      params.push(searchTerm, searchTerm, searchTerm, searchTerm);
     }
 
     if (category_id) {

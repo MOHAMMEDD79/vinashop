@@ -850,12 +850,105 @@ ul, ol {
 @media (max-width: 768px) {
   .hide-mobile { display: none !important; }
 
-  h1 { font-size: var(--font-3xl); }
-  h2 { font-size: var(--font-2xl); }
-  h3 { font-size: var(--font-xl); }
+  :root {
+    --container-padding: 16px;
+  }
 
-  .section { padding: var(--spacing-2xl) 0; }
-  .section-title { font-size: var(--font-2xl); }
+  h1 { font-size: var(--font-2xl); }
+  h2 { font-size: var(--font-xl); }
+  h3 { font-size: var(--font-lg); }
+
+  .section { padding: var(--spacing-xl) 0; }
+  .section-title { font-size: var(--font-xl); }
+  .section-subtitle { font-size: var(--font-base); }
+
+  .btn {
+    padding: 12px 20px;
+    font-size: var(--font-sm);
+  }
+
+  .btn-lg {
+    padding: 14px 24px;
+    font-size: var(--font-base);
+  }
+
+  .card-body {
+    padding: var(--spacing-md);
+  }
+
+  .form-input,
+  .form-select,
+  .form-textarea {
+    padding: 12px 14px;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --container-padding: 12px;
+  }
+
+  h1 { font-size: var(--font-xl); }
+  h2 { font-size: var(--font-lg); }
+  h3 { font-size: var(--font-base); }
+
+  .section { padding: var(--spacing-lg) 0; }
+  .section-header { margin-bottom: var(--spacing-lg); }
+  .section-title { font-size: var(--font-lg); }
+  .section-title::after { width: 40px; height: 2px; }
+
+  .btn {
+    padding: 10px 16px;
+    font-size: var(--font-sm);
+    border-radius: var(--radius-md);
+  }
+
+  .btn-lg {
+    padding: 12px 20px;
+  }
+
+  .btn-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .card {
+    border-radius: var(--radius-md);
+  }
+
+  .card-body {
+    padding: var(--spacing-sm);
+  }
+
+  .loading-container {
+    min-height: 200px;
+  }
+
+  .empty-state {
+    padding: var(--spacing-xl);
+  }
+
+  .empty-state-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .empty-state-title {
+    font-size: var(--font-lg);
+  }
+
+  .scroll-to-top {
+    width: 42px;
+    height: 42px;
+    bottom: 80px;
+    right: 16px;
+  }
+
+  [dir="rtl"] .scroll-to-top {
+    right: auto;
+    left: 16px;
+  }
 }
 
 @media (min-width: 769px) {

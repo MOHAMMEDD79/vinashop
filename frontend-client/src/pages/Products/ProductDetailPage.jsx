@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import {
   FiMinus, FiPlus, FiShoppingCart, FiHeart, FiShare2,
   FiStar, FiCheck, FiTruck, FiShield, FiRefreshCw,
-  FiChevronLeft, FiChevronRight
+  FiChevronLeft, FiChevronRight, FiMaximize2
 } from 'react-icons/fi';
 import { useLanguage } from '../../context/LanguageContext';
 import { useCart } from '../../context/CartContext';
@@ -11,6 +11,7 @@ import { useWishlist } from '../../context/WishlistContext';
 import { productApi } from '../../services/api';
 import ProductCard from '../../components/product/ProductCard';
 import Loading from '../../components/common/Loading';
+import ImageLightbox from '../../components/common/ImageLightbox';
 import { formatPrice, getImageUrl } from '../../utils/constants';
 import './ProductDetailPage.css';
 
@@ -28,6 +29,7 @@ const ProductDetailPage = () => {
   const [activeTab, setActiveTab] = useState('description');
   const [selectedOptions, setSelectedOptions] = useState({});
   const [addedToCart, setAddedToCart] = useState(false);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
 
   // Review form state
   const [showReviewForm, setShowReviewForm] = useState(false);
@@ -262,7 +264,7 @@ const ProductDetailPage = () => {
                 </button>
               )}
 
-              <div className="main-image">
+              <div className="main-image" onClick={() => setLightboxOpen(true)}>
                 <img
                   src={getImageUrl(images[selectedImage]?.image_url)}
                   alt={getLocalized(product, 'name')}
@@ -273,6 +275,16 @@ const ProductDetailPage = () => {
                 {product.is_new && (
                   <span className="new-badge">{language === 'ar' ? 'جديد' : 'NEW'}</span>
                 )}
+                <button
+                  className="fullscreen-btn"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setLightboxOpen(true);
+                  }}
+                  aria-label={language === 'ar' ? 'عرض بالحجم الكامل' : 'View fullscreen'}
+                >
+                  <FiMaximize2 />
+                </button>
               </div>
 
               {images.length > 1 && (
@@ -701,6 +713,15 @@ const ProductDetailPage = () => {
           </section>
         )}
       </div>
+
+      {/* Image Lightbox */}
+      <ImageLightbox
+        images={images}
+        currentIndex={selectedImage}
+        isOpen={lightboxOpen}
+        onClose={() => setLightboxOpen(false)}
+        getImageUrl={getImageUrl}
+      />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 const CartContext = createContext();
@@ -21,16 +21,38 @@ const getSessionId = () => {
   return sessionId;
 };
 
+// Initialize cart from localStorage (runs only once)
+const initializeCart = () => {
+  try {
+    const saved = localStorage.getItem('vinashop_cart');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      return Array.isArray(parsed) ? parsed : [];
+    }
+  } catch (e) {
+    console.error('Failed to parse cart from localStorage:', e);
+  }
+  return [];
+};
+
 export const CartProvider = ({ children }) => {
   const [sessionId] = useState(getSessionId);
-  const [items, setItems] = useState(() => {
-    const saved = localStorage.getItem('vinashop_cart');
-    return saved ? JSON.parse(saved) : [];
-  });
+  const [items, setItems] = useState(initializeCart);
   const [isOpen, setIsOpen] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
+  const isFirstRender = useRef(true);
 
-  // Save cart to localStorage whenever items change
+  // Mark as initialized after first render
   useEffect(() => {
+    setIsInitialized(true);
+  }, []);
+
+  // Save cart to localStorage whenever items change (skip first render)
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
     localStorage.setItem('vinashop_cart', JSON.stringify(items));
   }, [items]);
 
@@ -152,6 +174,7 @@ export const CartProvider = ({ children }) => {
     itemCount,
     subtotal,
     isOpen,
+    isInitialized,
     addItem,
     updateQuantity,
     removeItem,

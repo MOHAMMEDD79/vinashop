@@ -8,7 +8,12 @@ import './CartDrawer.css';
 
 const CartDrawer = () => {
   const { t, getLocalized, isRTL } = useLanguage();
-  const { items, isOpen, closeCart, updateQuantity, removeItem, subtotal, itemCount } = useCart();
+  const { items, isOpen, isInitialized, closeCart, updateQuantity, removeItem, subtotal, itemCount } = useCart();
+
+  // Don't render until cart is initialized to prevent flash
+  if (!isInitialized) {
+    return null;
+  }
 
   // Prevent body scroll when drawer is open
   useEffect(() => {
